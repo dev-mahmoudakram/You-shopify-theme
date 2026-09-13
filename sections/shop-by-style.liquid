@@ -1,0 +1,63 @@
+{%- comment -%} YOU® — Shop by style: collection tiles {%- endcomment -%}
+<section class="section" id="shop-by-style">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow eyebrow--sage">{{ section.settings.eyebrow | escape }}</p>
+      <h2 class="display featured__title">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="styles__grid">
+      {%- for block in section.blocks -%}
+        {%- assign col = collections[block.settings.collection] -%}
+        {%- assign mod = forloop.index0 | modulo: 3 -%}
+        <a class="style-tile reveal" href="{{ col.url | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.heading | escape }}" loading="lazy" width="900" height="1125">
+          {%- elsif col.featured_image -%}
+            <img src="{{ col.featured_image | image_url: width: 900 }}" alt="{{ col.title | escape }}" loading="lazy" width="900" height="1125">
+          {%- else -%}
+            {%- assign demo = 'style1,style2,style3' | split: ',' -%}
+            <img src="{{ demo[mod] | append: '.jpg' | asset_url }}" alt="" loading="lazy" width="900" height="1125">
+          {%- endif -%}
+          <div class="style-tile__veil"></div>
+          <div class="style-tile__label">
+            <p class="style-tile__name">{{ block.settings.heading | default: col.title | escape }}</p>
+            <p class="style-tile__count">{{ block.settings.subheading | default: 'Shop now' | escape }}</p>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by style",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Silhouettes" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop By Style" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Style tile",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image (overrides collection image)" },
+        { "type": "text", "id": "heading", "label": "Title", "default": "Hoodies" },
+        { "type": "text", "id": "subheading", "label": "Subtitle", "default": "8 pieces" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Shop by style",
+      "blocks": [
+        { "type": "tile", "settings": { "heading": "Hoodies", "subheading": "Heavyweight fleece" } },
+        { "type": "tile", "settings": { "heading": "Sets", "subheading": "Matched volumes" } },
+        { "type": "tile", "settings": { "heading": "Essentials", "subheading": "Everyday base" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

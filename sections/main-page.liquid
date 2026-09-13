@@ -1,0 +1,9 @@
+{%- comment -%} YOU® — Regular page {%- endcomment -%}
+<div class="simple-page">
+  <div class="container">
+    <p class="eyebrow eyebrow--sage">{{ page.title | escape }}</p>
+    <h1 class="display simple-page__title">{{ page.title | escape }}</h1>
+    <div class="simple-page__body">{{ page.content }}</div>
+  </div>
+</div>
+{% schema %}{"name":"Page"}{% endschema %}

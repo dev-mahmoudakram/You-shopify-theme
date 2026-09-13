@@ -1,0 +1,64 @@
+{%- comment -%} YOU® — Collection page: header + toolbar + grid {%- endcomment -%}
+{% paginate collection.products by 12 %}
+<div class="collection-head">
+  <div class="container">
+    <p class="eyebrow eyebrow--sage">Collection</p>
+    <h1 class="display collection-head__title">{{ collection.title }}</h1>
+    <p class="collection-head__meta">{{ collection.products_count }} pieces</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="toolbar">
+    <form class="toolbar__filters" method="get" action="{{ collection.url }}" id="FacetForm">
+      <span class="toolbar__label">Filter</span>
+      {%- if section.settings.sort_by_tags and collection.all_tags.size > 0 -%}
+        {%- assign current_tags_handleized = current_tags | join: ',' | handleize -%}
+        {%- for tag in collection.all_tags -%}
+          <label class="chip {% if current_tags contains tag %}is-active{% endif %}">
+            <input type="checkbox" name="constraint" value="{{ tag | handleize }}" {% if current_tags contains tag %}checked{% endif %} onchange="this.form.submit()" hidden>
+            {{ tag }}
+          </label>
+        {%- endfor -%}
+      {%- endif -%}
+    </form>
+
+    <form class="toolbar__sort" method="get" action="{{ collection.url }}">
+      {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+      <select class="sort-select" name="sort_by" onchange="this.form.submit()" aria-label="{{ 'collections.general.sort_by' | t }}">
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+        {%- endfor -%}
+      </select>
+    </form>
+  </div>
+
+  <div class="collection-grid">
+    {%- if collection.products.size > 0 -%}
+      <div class="product-grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="collection-pagination" style="margin-top:56px;text-align:center;" aria-label="Pagination">
+          {%- if paginate.previous -%}<a class="chip" href="{{ paginate.previous.url }}">← Prev</a>{%- endif -%}
+          <span class="toolbar__label" style="margin:0 16px;">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}<a class="chip" href="{{ paginate.next.url }}">Next →</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <p class="collection-empty">{{ 'collections.general.no_products' | t }}</p>
+    {%- endif -%}
+  </div>
+</div>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "checkbox", "id": "sort_by_tags", "label": "Show tag filter chips", "default": true }
+  ]
+}
+{% endschema %}

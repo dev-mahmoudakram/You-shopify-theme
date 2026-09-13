@@ -1,0 +1,29 @@
+{%- comment -%} YOU® — Cart drawer (AJAX) {%- endcomment -%}
+{%- if settings.cart_drawer_enabled -%}
+<aside class="drawer drawer--right" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Cart">
+  <div class="drawer__head">
+    <span class="drawer__title">{{ 'general.cart.cart' | t }} (<span data-cart-count>{{ cart.item_count }}</span>)</span>
+    <button class="drawer__close" data-drawer-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="ship-bar" data-ship-bar>
+    <p class="ship-bar__text" data-ship-text></p>
+    <div class="ship-bar__track"><div class="ship-bar__fill" data-ship-fill></div></div>
+  </div>
+
+  <div class="drawer__items thin-scroll" data-cart-items></div>
+
+  <div class="drawer__foot" data-cart-foot>
+    <div class="drawer__subtotal">
+      <span>{{ 'general.cart.subtotal' | t }}</span>
+      <span class="money" data-cart-subtotal>{{ cart.total_price | money }}</span>
+    </div>
+    <p class="drawer__note">Shipping & taxes calculated at checkout</p>
+    <form action="{{ routes.cart_url }}" method="post">
+      <button type="submit" name="checkout" class="btn btn--ink drawer__checkout">{{ 'general.cart.checkout' | t }}</button>
+    </form>
+  </div>
+</aside>
+{%- endif -%}

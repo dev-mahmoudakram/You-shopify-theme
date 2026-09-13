@@ -1,0 +1,36 @@
+{%- comment -%} YOU® — Search results page {%- endcomment -%}
+<div class="cart-page">
+  <div class="container">
+    <p class="eyebrow eyebrow--sage">{{ 'general.search.search' | t }}</p>
+    <h1 class="display cart-page__title">
+      {%- if search.performed -%}“{{ search.terms | escape }}”{%- else -%}{{ 'general.search.search' | t }}{%- endif -%}
+    </h1>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <p class="collection-head__meta" style="margin-bottom:32px;">{{ search.results_count }} results</p>
+        <div class="product-grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}
+              {% render 'product-card', product: item %}
+            {%- else -%}
+              <a class="card" href="{{ item.url }}">
+                <div class="card__media" style="display:flex;align-items:center;justify-content:center;padding:24px;">
+                  <p class="card__title">{{ item.title | escape }}</p>
+                </div>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="collection-empty">{{ 'general.search.no_results' | t }}</p>
+      {%- endif -%}
+    {%- else -%}
+      <form class="newsletter__form" action="{{ routes.search_url }}" method="get" role="search" style="max-width:460px;">
+        <input class="newsletter__input" type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="Search">
+        <button class="newsletter__btn" type="submit">{{ 'general.search.search' | t }}</button>
+      </form>
+    {%- endif -%}
+  </div>
+</div>
+{% schema %}{"name":"Search results"}{% endschema %}

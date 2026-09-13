@@ -1,0 +1,61 @@
+{%- comment -%} YOU® — Fabric quality: black macro band {%- endcomment -%}
+<section class="fabric">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow eyebrow--sage">{{ section.settings.eyebrow | escape }}</p>
+      <h2 class="display featured__title">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="fabric__grid">
+      {%- for block in section.blocks -%}
+        {%- assign mod = forloop.index0 | modulo: 3 -%}
+        <div class="fabric__item reveal" {{ block.shopify_attributes }}>
+          <p class="fabric__num">{{ block.settings.number | default: forloop.index | prepend: '0' | slice: -2, 2 }} — {{ block.settings.name | escape }}</p>
+          <div class="fabric__frame">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="900" height="1125">
+            {%- else -%}
+              {%- assign demo = 'detail1,detail2,detail3' | split: ',' -%}
+              <img src="{{ demo[mod] | append: '.jpg' | asset_url }}" alt="Fabric detail" loading="lazy" width="900" height="1125">
+            {%- endif -%}
+          </div>
+          <h3 class="fabric__name">{{ block.settings.title | escape }}</h3>
+          <p class="fabric__desc">{{ block.settings.description | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fabric quality",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Material" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built From Heavyweight." }
+  ],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Detail",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Macro image" },
+        { "type": "text", "id": "number", "label": "Number", "default": "1" },
+        { "type": "text", "id": "name", "label": "Small name", "default": "Fleece" },
+        { "type": "text", "id": "title", "label": "Title", "default": "480 GSM Loopback" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Brushed inside, dense face. Holds its boxy shape wash after wash." }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Fabric quality",
+      "blocks": [
+        { "type": "detail", "settings": { "number": "1", "name": "Fleece", "title": "480 GSM Loopback", "description": "Brushed inside, dense face. Holds its boxy shape wash after wash." } },
+        { "type": "detail", "settings": { "number": "2", "name": "Patch", "title": "Embroidered Mark", "description": "Raised stitch patch — the signature sewn on every piece." } },
+        { "type": "detail", "settings": { "number": "3", "name": "Seams", "title": "Wave Seams", "description": "Flat-locked wavy seams that read like a signature from across the room." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

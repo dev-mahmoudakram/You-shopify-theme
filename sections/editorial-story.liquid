@@ -1,0 +1,69 @@
+{%- comment -%} YOU® — Editorial story: floating cropped campaign frames {%- endcomment -%}
+<section class="editorial ed" aria-label="Editorial">
+  <div class="editorial__frame editorial__frame--left">
+    <div class="ed-parallax ed-mp-a" style="width:100%;height:100%;">
+      <figure class="ed-reveal" style="--edx:-64px;width:100%;height:100%;margin:0;">
+        {%- if section.settings.image_left != blank -%}
+          <img src="{{ section.settings.image_left | image_url: width: 900 }}" alt="{{ section.settings.image_left.alt | escape }}" loading="lazy" width="900" height="1200">
+        {%- else -%}
+          <img src="{{ 'editorial-mono.jpg' | asset_url }}" alt="Campaign" loading="lazy" width="900" height="1200">
+        {%- endif -%}
+      </figure>
+    </div>
+  </div>
+
+  <div class="editorial__frame editorial__frame--right">
+    <div class="ed-parallax ed-mp-b" style="width:100%;height:100%;">
+      <figure class="ed-reveal" style="--edx:72px;--edelay:140ms;width:100%;height:100%;margin:0;">
+        {%- if section.settings.image_right != blank -%}
+          <img src="{{ section.settings.image_right | image_url: width: 900 }}" alt="{{ section.settings.image_right.alt | escape }}" loading="lazy" width="900" height="1200">
+        {%- else -%}
+          <img src="{{ 'editorial-glacier.jpg' | asset_url }}" alt="Campaign" loading="lazy" width="900" height="1200">
+        {%- endif -%}
+      </figure>
+    </div>
+  </div>
+
+  {%- comment -%} mobile stacks {%- endcomment -%}
+  <div class="editorial__mobile">
+    {%- if section.settings.image_left != blank -%}
+      <img src="{{ section.settings.image_left | image_url: width: 800 }}" alt="" loading="lazy" width="800" height="1067">
+    {%- else -%}
+      <img src="{{ 'editorial-mono.jpg' | asset_url }}" alt="" loading="lazy" width="800" height="1067">
+    {%- endif -%}
+  </div>
+  <div class="editorial__mobile editorial__mobile--second">
+    {%- if section.settings.image_right != blank -%}
+      <img src="{{ section.settings.image_right | image_url: width: 640 }}" alt="" loading="lazy" width="640" height="853">
+    {%- else -%}
+      <img src="{{ 'editorial-glacier.jpg' | asset_url }}" alt="" loading="lazy" width="640" height="853">
+    {%- endif -%}
+  </div>
+
+  <div class="container editorial__content">
+    <div class="editorial__copy">
+      <p class="eyebrow eyebrow--sage">{{ section.settings.eyebrow | escape }}</p>
+      <h2 class="display editorial__title">{{ section.settings.heading | escape }}</h2>
+      <div class="editorial__rule"></div>
+      {%- if section.settings.line_1 != blank -%}<p class="editorial__line">{{ section.settings.line_1 | escape }}</p>{%- endif -%}
+      {%- if section.settings.line_2 != blank -%}<p class="editorial__line">{{ section.settings.line_2 | escape }}</p>{%- endif -%}
+      {%- if section.settings.line_3 != blank -%}<p class="editorial__line">{{ section.settings.line_3 | escape }}</p>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial story",
+  "settings": [
+    { "type": "image_picker", "id": "image_left", "label": "Left frame image (portrait)" },
+    { "type": "image_picker", "id": "image_right", "label": "Right frame image (portrait)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FW26 Editorial" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "MADE TO STAND OUT." },
+    { "type": "text", "id": "line_1", "label": "Line 1", "default": "Cut from concrete weather," },
+    { "type": "text", "id": "line_2", "label": "Line 2", "default": "worn by whoever refuses" },
+    { "type": "text", "id": "line_3", "label": "Line 3", "default": "to blend in." }
+  ],
+  "presets": [{ "name": "Editorial story" }]
+}
+{% endschema %}

@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "FW26 — Volume 03",
+        "heading": "Latest Arrivals",
+        "count": 8,
+        "link_label": "View all"
+      }
+    },
+    "statement": {
+      "type": "brand-statement"
+    },
+    "editorial": {
+      "type": "editorial-story"
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "blocks": {
+        "l1": { "type": "look", "settings": { "caption": "Look 01" } },
+        "l2": { "type": "look", "settings": { "caption": "Look 02" } },
+        "l3": { "type": "look", "settings": { "caption": "Look 03" } },
+        "l4": { "type": "look", "settings": { "caption": "Look 04" } }
+      },
+      "block_order": ["l1", "l2", "l3", "l4"]
+    },
+    "styles": {
+      "type": "shop-by-style",
+      "blocks": {
+        "s1": { "type": "tile", "settings": { "heading": "Hoodies", "subheading": "Heavyweight fleece" } },
+        "s2": { "type": "tile", "settings": { "heading": "Sets", "subheading": "Matched volumes" } },
+        "s3": { "type": "tile", "settings": { "heading": "Essentials", "subheading": "Everyday base" } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "newdrop": {
+      "type": "new-drop"
+    },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Proven Pieces",
+        "heading": "Best Sellers",
+        "count": 4,
+        "link_label": "Shop all"
+      }
+    },
+    "fabric": {
+      "type": "fabric-quality",
+      "blocks": {
+        "f1": { "type": "detail", "settings": { "number": "1", "name": "Fleece", "title": "480 GSM Loopback", "description": "Brushed inside, dense face. Holds its boxy shape wash after wash." } },
+        "f2": { "type": "detail", "settings": { "number": "2", "name": "Patch", "title": "Embroidered Mark", "description": "Raised stitch patch — the signature sewn on every piece." } },
+        "f3": { "type": "detail", "settings": { "number": "3", "name": "Seams", "title": "Wave Seams", "description": "Flat-locked wavy seams that read like a signature from across the room." } }
+      },
+      "block_order": ["f1", "f2", "f3"]
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review" },
+        "r2": { "type": "review", "settings": { "text": "Sizing chart is exact. Oversized the way it should be — sculpted, not sloppy.", "author": "Omar S.", "product": "Signal Hoodie" } },
+        "r3": { "type": "review", "settings": { "text": "You can feel the weight the second you lift it. Worth every dollar.", "author": "Lina M.", "product": "Wave Set Steel" } }
+      },
+      "block_order": ["r1", "r2", "r3"]
+    },
+    "instagram": {
+      "type": "instagram-gallery",
+      "blocks": {
+        "i1": { "type": "tile" },
+        "i2": { "type": "tile" },
+        "i3": { "type": "tile" },
+        "i4": { "type": "tile" },
+        "i5": { "type": "tile" },
+        "i6": { "type": "tile" }
+      },
+      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6"]
+    },
+    "newsletter": {
+      "type": "newsletter"
+    }
+  },
+  "order": [
+    "hero",
+    "featured",
+    "statement",
+    "editorial",
+    "lookbook",
+    "styles",
+    "newdrop",
+    "bestsellers",
+    "fabric",
+    "reviews",
+    "instagram",
+    "newsletter"
+  ]
+}

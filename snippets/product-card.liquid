@@ -1,0 +1,42 @@
+{%- comment -%}
+  YOU® — Product card (with hover second-image + quick add)
+  Accepts: product
+{%- endcomment -%}
+<div class="card">
+  <div class="card__media">
+    <a class="card__media-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}" style="position:absolute;inset:0;z-index:1;"></a>
+    {%- if product.compare_at_price_max > product.price -%}
+      <span class="card__badge" style="z-index:2;">Sale</span>
+    {%- elsif product.tags contains 'new' -%}
+      <span class="card__badge" style="z-index:2;">New</span>
+    {%- endif -%}
+
+    {%- if product.featured_media -%}
+      <img class="card__img card__img--main" src="{{ product.featured_media | image_url: width: 700 }}" alt="{{ product.featured_media.alt | escape }}" loading="lazy" width="700" height="933">
+      {%- assign alt_media = product.media[1] -%}
+      {%- if alt_media -%}
+        <img class="card__img card__img--alt" src="{{ alt_media | image_url: width: 700 }}" alt="" loading="lazy" width="700" height="933">
+      {%- endif -%}
+    {%- else -%}
+      {%- assign demo_index = forloop.index0 | modulo: 8 -%}
+      {%- assign demo = 'wave-black,wave-grey,wave-blue,patch-campfire,patch-drive,look2,style1,style2' | split: ',' -%}
+      <img class="card__img card__img--main" src="{{ demo[demo_index] | append: '.jpg' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy" width="700" height="933">
+    {%- endif -%}
+
+    {%- if product.available -%}
+      <div class="card__quick" data-handle="{{ product.handle }}">
+        <p class="card__quick-label">{{ 'products.product.quick_add' | t }}</p>
+        <div class="card__sizes"></div>
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="card__info">
+    <p class="card__title"><a href="{{ product.url }}">{{ product.title }}</a></p>
+    <p class="card__price">
+      {%- if product.compare_at_price > product.price -%}
+        <s>{{ product.compare_at_price | money }}</s>
+      {%- endif -%}
+      <span class="money">{{ product.price | money }}</span>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+{%- comment -%} YOU® — Product page {%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a><span class="sep">/</span>
+    <a href="{{ routes.all_products_collection_url }}">Shop</a><span class="sep">/</span>
+    <span>{{ product.title }}</span>
+  </nav>
+
+  <div class="pdp" data-product-form>
+    <div class="pdp-gallery">
+      <div class="pdp-gallery__main">
+        {%- if product.featured_media -%}
+          <img data-gallery-main src="{{ product.featured_media | image_url: width: 1200 }}" alt="{{ product.featured_media.alt | escape }}" width="1200" height="1500" fetchpriority="high">
+        {%- else -%}
+          <img data-gallery-main src="{{ 'wave-black.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1200" height="1500" fetchpriority="high">
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="pdp-thumbs">
+          {%- for media in product.media limit: 6 -%}
+            <button class="pdp-thumb {% if forloop.first %}is-active{% endif %}" data-full="{{ media | image_url: width: 1200 }}" aria-label="Image {{ forloop.index }}">
+              <img src="{{ media | image_url: width: 200 }}" alt="" loading="lazy" width="200" height="200">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pdp-info">
+      {%- if product.type != blank -%}<p class="eyebrow eyebrow--sage pdp-info__eyebrow">{{ product.type | escape }}</p>{%- endif -%}
+      <h1 class="display pdp-title">{{ product.title }}</h1>
+      <p class="pdp-price">
+        <span data-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+        {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+          <s data-compare>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s>
+        {%- endif -%}
+      </p>
+
+      {% form 'product', product, id: null, class: 'pdp-form', novalidate: 'novalidate' %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-id>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="pdp-option">
+              <div class="pdp-option__head">
+                <span class="pdp-option__name">{{ option.name | escape }}</span>
+                <span class="pdp-option__value" data-option-value="{{ option.name | escape }}">{{ option.selected_value | escape }}</span>
+                {%- if option.name == 'Size' -%}
+                  <button type="button" class="sizeguide-link" data-open-size-guide>{{ 'products.product.size_guide' | t }}</button>
+                {%- endif -%}
+              </div>
+              <div class="pdp-pills">
+                {%- for value in option.values -%}
+                  <button
+                    type="button"
+                    class="pill {% if option.selected_value == value %}is-active{% endif %}"
+                    data-option="{{ option.name | escape }}"
+                    data-value="{{ value | escape }}">
+                    {{ value }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <div class="pdp-qty" data-qty-box>
+          <span class="pdp-option__name">{{ 'products.product.quantity' | t }}</span>
+          <span class="qty">
+            <button type="button" data-qty-dec aria-label="Decrease">−</button>
+            <input class="pdp-qty__input" data-qty-input type="number" name="quantity" value="1" min="1" max="9" inputmode="numeric">
+            <button type="button" data-qty-inc aria-label="Increase">+</button>
+          </span>
+        </div>
+
+        <div class="pdp-cta">
+          <button type="button" class="btn btn--ink pdp-atc" data-atc data-label="{{ 'products.product.add_to_cart' | t }}" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+            {%- if product.selected_or_first_available_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+          </button>
+          <button type="button" class="pdp-buy" data-buy>Buy it now</button>
+        </div>
+      {% endform %}
+
+      <ul class="pdp-trust">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'trust' -%}
+            <li {{ block.shopify_attributes }}><span class="dot"></span>{{ block.settings.text | escape }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+
+      <div class="pdp-accordions">
+        {%- if product.description != blank -%}
+          <div class="acc is-open">
+            <button class="acc__head" type="button">Details
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+            <div class="acc__body">{{ product.description }}</div>
+          </div>
+        {%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'accordion' -%}
+            <div class="acc" {{ block.shopify_attributes }}>
+              <button class="acc__head" type="button">{{ block.settings.title | escape }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+              <div class="acc__body">{{ block.settings.content }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <script type="application/json" data-variant-json>{{ product.variants | json }}</script>
+      <script type="application/json" data-option-names>[{% for option in product.options %}{{ option | json }}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
+    </div>
+  </div>
+
+  {%- comment -%} detail storytelling {%- endcomment -%}
+  {%- assign has_detail = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'detail' -%}{%- assign has_detail = true -%}{%- endif -%}{%- endfor -%}
+  {%- if has_detail -%}
+    <div class="pdp-details">
+      <div class="pdp-details__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'detail' -%}
+            <div {{ block.shopify_attributes }}>
+              <p class="pdp-detail__num">{{ block.settings.number | escape }}</p>
+              <h3 class="fabric__name">{{ block.settings.title | escape }}</h3>
+              <p class="pdp-detail__text">{{ block.settings.text | escape }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{%- assign related = collections[section.settings.related_collection] -%}
+{%- if related.products.size > 0 -%}
+  <div class="related">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow eyebrow--sage">Keep Going</p>
+        <h2 class="display featured__title">You May Also Like</h2>
+      </div>
+      <div class="product-grid">
+        {%- for item in related.products limit: 4 -%}
+          {% render 'product-card', product: item %}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% render 'size-guide' %}
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "collection", "id": "related_collection", "label": "Related products collection" }
+  ],
+  "blocks": [
+    { "type": "trust", "name": "Trust item", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Free worldwide shipping over $150" }] },
+    { "type": "accordion", "name": "Accordion", "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "Shipping & Returns" },
+      { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Free express shipping over $150. 14-day returns on unworn pieces with tags.</p>" }
+    ] },
+    { "type": "detail", "name": "Story detail", "settings": [
+      { "type": "text", "id": "number", "label": "Number", "default": "01" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Oversized, engineered" },
+      { "type": "textarea", "id": "text", "label": "Text", "default": "Boxy cut with dropped shoulders and a sculpted hem — sized true, worn big." }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "Product",
+      "blocks": [
+        { "type": "trust", "settings": { "text": "Free worldwide shipping over $150" } },
+        { "type": "trust", "settings": { "text": "14-day returns, no questions" } },
+        { "type": "trust", "settings": { "text": "Ships in 48h from our studio" } },
+        { "type": "accordion" }
+      ]
+    }
+  ]
+}
+{% endschema %}

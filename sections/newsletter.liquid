@@ -1,0 +1,50 @@
+{%- comment -%} YOU® — Newsletter (sage block, Shopify customer form) {%- endcomment -%}
+<section class="newsletter">
+  <div class="container" style="text-align:center;">
+    <p class="eyebrow" style="color:rgba(0,0,0,0.6);">{{ section.settings.eyebrow | escape }}</p>
+    <h2 class="display newsletter__title">{{ section.settings.heading | escape }}</h2>
+    <p class="newsletter__sub">{{ section.settings.body | escape }}</p>
+
+    {% form 'customer', class: 'newsletter-form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="newsletter__form" style="text-align:left;">
+        <input
+          class="newsletter__input"
+          type="email"
+          name="contact[email]"
+          id="NewsletterEmail-{{ section.id }}"
+          value="{{ form.email }}"
+          placeholder="Email address"
+          aria-label="Email address"
+          autocorrect="off"
+          autocapitalize="off"
+          required>
+        <button class="newsletter__btn" type="submit" name="commit">{{ section.settings.button_label | escape }}</button>
+      </div>
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter__note">{{ 'general.newsletter.success' | t }}</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p class="newsletter__note">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+      {%- endif -%}
+    {% endform %}
+
+    {%- if section.settings.note != blank -%}
+      <p class="newsletter__note">{{ section.settings.note | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Inner List" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Join Before Everyone Else." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Drops sell through in hours. Get the early link, the sizing memo and nothing else." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Join" },
+    { "type": "text", "id": "note", "label": "Small note", "default": "No spam. Unsubscribe anytime." }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

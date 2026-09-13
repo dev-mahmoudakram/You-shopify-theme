@@ -1,0 +1,24 @@
+{%- comment -%} YOU® — All collections grid {%- endcomment -%}
+<div class="cart-page">
+  <div class="container">
+    <p class="eyebrow eyebrow--sage">Browse</p>
+    <h1 class="display cart-page__title">Collections</h1>
+    <div class="styles__grid">
+      {%- for collection in collections -%}
+        <a class="style-tile" href="{{ collection.url }}">
+          {%- if collection.featured_image -%}
+            <img src="{{ collection.featured_image | image_url: width: 900 }}" alt="{{ collection.title | escape }}" loading="lazy" width="900" height="1125">
+          {%- else -%}
+            <div style="width:100%;height:100%;background:var(--raised);"></div>
+          {%- endif -%}
+          <div class="style-tile__veil"></div>
+          <div class="style-tile__label">
+            <p class="style-tile__name">{{ collection.title }}</p>
+            <p class="style-tile__count">{{ collection.products_count }} pieces</p>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{% schema %}{"name":"Collections list"}{% endschema %}

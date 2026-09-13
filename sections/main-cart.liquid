@@ -1,0 +1,50 @@
+{%- comment -%} YOU® — Cart page {%- endcomment -%}
+<div class="cart-page">
+  <div class="container">
+    <h1 class="display cart-page__title">Cart</h1>
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <table class="cart-table">
+          <thead>
+            <tr><th>Product</th><th>Qty</th><th style="text-align:right;">Total</th></tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr>
+                <td>
+                  <div style="display:flex;gap:16px;align-items:center;">
+                    {%- if item.image -%}
+                      <img src="{{ item.image | image_url: width: 160 }}" alt="" width="80" loading="lazy" style="aspect-ratio:3/4;object-fit:cover;">
+                    {%- endif -%}
+                    <div>
+                      <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                      {%- if item.variant.title != 'Default Title' -%}<p class="cart-line__variant">{{ item.variant.title }}</p>{%- endif -%}
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="qty">
+                    <button type="button" onclick="var i=this.nextElementSibling;i.value=Math.max(1,i.value-1);this.closest('form').submit();">−</button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:40px;height:44px;text-align:center;background:transparent;border:0;">
+                    <button type="button" onclick="var i=this.previousElementSibling;i.value=Math.min(9,+i.value+1);this.closest('form').submit();">+</button>
+                  </span>
+                </td>
+                <td style="text-align:right;" class="money">{{ item.final_line_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+        <div class="cart-page__foot">
+          <p class="cart-page__subtotal">Subtotal — <span class="money">{{ cart.total_price | money }}</span></p>
+          <button type="submit" name="checkout" class="btn btn--ink">{{ 'general.cart.checkout' | t }}</button>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="drawer__empty" style="text-align:left;padding:40px 0;">
+        <p class="mute">{{ 'general.cart.empty' | t }}</p>
+        <a class="btn btn--ink" href="{{ routes.all_products_collection_url }}">{{ 'general.cart.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+{% schema %}{"name":"Cart page"}{% endschema %}

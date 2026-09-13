@@ -1,0 +1,50 @@
+{%- comment -%} YOU® — Reviews {%- endcomment -%}
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow eyebrow--sage">{{ section.settings.eyebrow | escape }}</p>
+      <h2 class="display featured__title">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="reviews__grid">
+      {%- for block in section.blocks -%}
+        <blockquote class="review reveal" {{ block.shopify_attributes }}>
+          <p class="review__stars">★★★★★</p>
+          <p class="review__text">“{{ block.settings.text | escape }}”</p>
+          <footer class="review__meta">{{ block.settings.author | escape }} — {{ block.settings.product | escape }}</footer>
+        </blockquote>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Worn & Verified" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What They Say" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Quote", "default": "The heaviest hoodie I own — the shape hasn't moved after months of wear." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Karim A." },
+        { "type": "text", "id": "product", "label": "Product", "default": "Wave Hoodie 01" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review", "settings": { "text": "Sizing chart is exact. Oversized the way it should be — sculpted, not sloppy.", "author": "Omar S.", "product": "Signal Hoodie" } },
+        { "type": "review", "settings": { "text": "You can feel the weight the second you lift it. Worth every dollar.", "author": "Lina M.", "product": "Wave Set Steel" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

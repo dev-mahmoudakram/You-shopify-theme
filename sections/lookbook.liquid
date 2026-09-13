@@ -1,0 +1,57 @@
+{%- comment -%} YOU® — Lookbook: asymmetric editorial grid {%- endcomment -%}
+<section class="lookbook" id="lookbook">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow eyebrow--sage">{{ section.settings.eyebrow | escape }}</p>
+      <h2 class="display featured__title">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="lookbook__grid">
+      {%- for block in section.blocks -%}
+        {%- assign mod = forloop.index0 | modulo: 4 -%}
+        <figure class="lookbook__item reveal" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy" width="1200" height="900">
+          {%- else -%}
+            {%- assign demo = 'look1,look2,look3-v2,look4' | split: ',' -%}
+            <img src="{{ demo[mod] | append: '.jpg' | asset_url }}" alt="Lookbook" loading="lazy" width="1200" height="900">
+          {%- endif -%}
+          {%- if block.settings.caption != blank -%}
+            <figcaption class="lookbook__caption">{{ block.settings.caption | escape }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lookbook",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FW26 — Lookbook" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Season, Worn." }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "Look 01" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Lookbook",
+      "blocks": [
+        { "type": "look", "settings": { "caption": "Look 01" } },
+        { "type": "look", "settings": { "caption": "Look 02" } },
+        { "type": "look", "settings": { "caption": "Look 03" } },
+        { "type": "look", "settings": { "caption": "Look 04" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

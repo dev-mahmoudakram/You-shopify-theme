@@ -1,0 +1,106 @@
+{%- comment -%} YOU® — Header: announcement bar + sticky nav {%- endcomment -%}
+<div class="announcement">
+  <p class="announcement__text">
+    {{ section.settings.announcement_text | escape }}
+    {%- if section.settings.announcement_text_2 != blank -%}
+      <span class="announcement__extra">&nbsp;&nbsp;·&nbsp;&nbsp;{{ section.settings.announcement_text_2 | escape }}</span>
+    {%- endif -%}
+  </p>
+</div>
+
+<header class="header" role="banner">
+  <div class="container">
+    <div class="header__row">
+      <div>
+        <button class="header__burger" data-open-menu aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <nav class="header__nav" aria-label="Main navigation">
+          {%- for link in section.settings.menu.links -%}
+            <a class="header__link link-underline" href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        </nav>
+      </div>
+
+      <a class="header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} — home">
+        {%- if settings.logo != blank -%}
+          <img src="{{ settings.logo | image_url: width: 440 }}" alt="{{ shop.name }}" width="{{ settings.logo_width | default: 130 }}" loading="eager" style="width:{{ settings.logo_width | default: 130 }}px;height:auto;">
+        {%- else -%}
+          <img src="{{ 'logo-sage.png' | asset_url }}" alt="{{ shop.name }}" width="130" loading="eager" style="width:130px;height:auto;">
+        {%- endif -%}
+      </a>
+
+      <div class="header__utils">
+        {%- if settings.music_enabled -%}
+          <button class="eq" data-sound-toggle aria-pressed="true" aria-label="Mute background music" title="Sound">
+            <span></span><span></span><span></span>
+          </button>
+        {%- endif -%}
+        <button class="header__icon" data-open-search aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+        {%- if shop.customer_accounts_enabled -%}
+          <a class="header__icon hide-mobile" href="{{ routes.account_url }}" aria-label="Account">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+          </a>
+        {%- endif -%}
+        <button class="header__icon" data-open-cart aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 8h12l1 13H5L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="header__cart-count" data-cart-count {% if cart.item_count == 0 %}style="display:none"{% endif %}>{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} mobile menu drawer {%- endcomment -%}
+<div class="drawer drawer--left mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer__head">
+    <span class="drawer__title">Menu</span>
+    <button class="drawer__close" data-drawer-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer__body">
+    <nav class="mobile-nav">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+      <a href="{{ routes.all_products_collection_url }}">All Products</a>
+      <a href="{{ routes.search_url }}">Search</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}">Account</a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}">Cart</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "shopify-section-header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement",
+      "default": "Free worldwide shipping over $150"
+    },
+    {
+      "type": "text",
+      "id": "announcement_text_2",
+      "label": "Announcement — second message",
+      "default": "FW26 drop — Volume 03 is live"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

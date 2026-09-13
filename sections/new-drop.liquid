@@ -1,0 +1,44 @@
+{%- comment -%} YOU® — New drop: full-width campaign block {%- endcomment -%}
+<section class="newdrop">
+  <div class="newdrop__media ed-parallax ed-mp-c">
+    {%- if section.settings.image != blank -%}
+      <img src="{{ section.settings.image | image_url: width: 1800 }}" srcset="{{ section.settings.image | image_url: width: 1000 }} 1000w, {{ section.settings.image | image_url: width: 1800 }} 1800w" alt="{{ section.settings.image.alt | escape }}" loading="lazy" width="1800" height="1013">
+    {%- else -%}
+      <img src="{{ 'editorial-glacier.jpg' | asset_url }}" alt="{{ shop.name }} campaign" loading="lazy" width="1800" height="1013">
+    {%- endif -%}
+  </div>
+  <div class="container">
+    <div class="newdrop__content">
+      <p class="eyebrow" style="color:var(--sage);">{{ section.settings.eyebrow | escape }}</p>
+      <h2 class="display newdrop__title">{{ section.settings.heading | escape }}</h2>
+      <p class="newdrop__chapter">{{ section.settings.body | escape }}</p>
+      <div class="newdrop__cta">
+        <a class="btn btn--light" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label | escape }}</a>
+        {%- if section.settings.link_label != blank -%}
+          <a class="newdrop__link link-underline" href="{{ section.settings.link_url | default: routes.root_url }}">{{ section.settings.link_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  {%- if section.settings.caption != blank -%}
+    <p class="newdrop__caption">{{ section.settings.caption | escape }}</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "New drop",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Campaign image (landscape)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FW26 — Volume 03" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "NEW DROP" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Chapter three. Heavier fleece, sculpted wave panelling and a colder palette — built for the season's long nights." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Explore Collection" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "text", "id": "link_label", "label": "Secondary link label", "default": "View the Lookbook" },
+    { "type": "url", "id": "link_url", "label": "Secondary link" },
+    { "type": "text", "id": "caption", "label": "Campaign caption", "default": "Campaign — Wave Hoodie 02 Glacier" }
+  ],
+  "presets": [{ "name": "New drop" }]
+}
+{% endschema %}

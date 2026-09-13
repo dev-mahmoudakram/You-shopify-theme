@@ -1,0 +1,47 @@
+{%- comment -%} YOU® — Brand statement: ghost model behind giant type {%- endcomment -%}
+<section class="statement ed" aria-label="Designed to be different">
+  <div class="statement__bg" aria-hidden="true">
+    <div class="ed-parallax ed-mp-a" style="position:absolute;inset:0;">
+      <div class="ed-reveal" style="--edx:0px;position:absolute;inset:0;overflow:hidden;">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="" loading="lazy" width="1024" height="1536">
+        {%- else -%}
+          <img src="{{ 'statement-bg.jpg' | asset_url }}" alt="" loading="lazy" width="1024" height="1536">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div class="statement__dim" aria-hidden="true"></div>
+  <div class="statement__fade-top" aria-hidden="true"></div>
+  <div class="statement__fade-bottom" aria-hidden="true"></div>
+
+  <div class="container statement__content">
+    <p class="font-arabic statement__ar" dir="rtl" lang="ar">{{ section.settings.text_ar | escape }}</p>
+    <h2 class="display statement__title">
+      {{ section.settings.heading_line_1 | escape }}<br>
+      {{ section.settings.heading_line_2 | escape }} <span class="text-outline">{{ section.settings.heading_outline | escape }}</span>
+    </h2>
+    <p class="statement__body">{{ section.settings.body | escape }}</p>
+    <div class="statement__marker">
+      <span class="rule"></span>
+      <span class="tag">{{ section.settings.marker | escape }}</span>
+      <span class="rule"></span>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand statement",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image (studio shot on black)" },
+    { "type": "text", "id": "text_ar", "label": "Arabic line", "default": "مصممة لتكون مختلفة" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading — line 1", "default": "Designed to" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading — line 2", "default": "be" },
+    { "type": "text", "id": "heading_outline", "label": "Outlined word", "default": "different." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Every piece is designed around comfort, oversized silhouettes and distinctive visual details. Nothing decorative. Nothing extra." },
+    { "type": "text", "id": "marker", "label": "Marker", "default": "YOU—03" }
+  ],
+  "presets": [{ "name": "Brand statement" }]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "sort_by_tags": true
+      }
+    }
+  },
+  "order": ["main"]
+}

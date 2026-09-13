@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "t1": { "type": "trust", "settings": { "text": "Free worldwide shipping over $150" } },
+        "t2": { "type": "trust", "settings": { "text": "14-day returns, no questions" } },
+        "t3": { "type": "trust", "settings": { "text": "Ships in 48h from our studio" } },
+        "a1": { "type": "accordion", "settings": { "title": "Shipping & Returns", "content": "<p>Free express shipping on orders over $150. 14-day returns on unworn pieces with tags attached.</p>" } },
+        "a2": { "type": "accordion", "settings": { "title": "Care", "content": "<p>Cold machine wash, inside out. Hang dry in shade. Do not tumble dry.</p>" } },
+        "d1": { "type": "detail", "settings": { "number": "01", "title": "Oversized, engineered", "text": "Boxy cut with dropped shoulders and a sculpted hem — sized true, worn big." } },
+        "d2": { "type": "detail", "settings": { "number": "02", "title": "Heavyweight comfort", "text": "Dense loopback fleece with a brushed interior that keeps its structure." } },
+        "d3": { "type": "detail", "settings": { "number": "03", "title": "The details", "text": "Embroidered signature, wavy flat-locked seams, tonal hardware." } }
+      },
+      "block_order": ["t1", "t2", "t3", "a1", "a2", "d1", "d2", "d3"]
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,57 @@
+{%- comment -%} YOU® — Featured collection / product grid {%- endcomment -%}
+{%- assign col = collections[section.settings.collection] -%}
+<section class="section">
+  <div class="container">
+    <div class="featured__head reveal">
+      <div>
+        <p class="eyebrow eyebrow--sage">{{ section.settings.eyebrow | escape }}</p>
+        <h2 class="display featured__title">{{ section.settings.heading | escape }}</h2>
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <a class="header__link link-underline featured__all" href="{{ col.url | default: routes.all_products_collection_url }}">{{ section.settings.link_label | escape }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid">
+      {%- if col.products.size > 0 -%}
+        {%- for product in col.products limit: section.settings.count -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} demo placeholders until real products exist {%- endcomment -%}
+        {%- assign demo = 'wave-black,wave-grey,wave-blue,patch-campfire,patch-drive,look2,style1,style2' | split: ',' -%}
+        {%- for i in (1..8) -%}
+          {%- assign idx = forloop.index0 | modulo: 8 -%}
+          {%- assign img = demo[idx] -%}
+          <div class="card">
+            <div class="card__media">
+              <img class="card__img card__img--main" src="{{ img | append: '.jpg' | asset_url }}" alt="Demo product" loading="lazy" width="600" height="800">
+              {%- assign idx2 = forloop.index0 | plus: 1 | modulo: 8 -%}
+              {%- assign img2 = demo[idx2] -%}
+              <img class="card__img card__img--alt" src="{{ img2 | append: '.jpg' | asset_url }}" alt="" loading="lazy" width="600" height="800">
+            </div>
+            <div class="card__info">
+              <p class="card__title">Demo product {{ i }}</p>
+              <p class="card__price">$145</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FW26 — Volume 03" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Latest Arrivals" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "count", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "View all" },
+    { "type": "url", "id": "link_url", "label": "Link" }
+  ],
+  "presets": [{ "name": "Featured collection" }]
+}
+{% endschema %}

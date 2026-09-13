@@ -1,0 +1,33 @@
+{%- comment -%} YOU® — Size guide modal {%- endcomment -%}
+{%- assign sg = pages['size-guide'] -%}
+<div class="modal" id="size-guide" role="dialog" aria-modal="true" aria-label="Size guide">
+  <div class="modal__veil" data-drawer-close></div>
+  <div class="modal__panel thin-scroll">
+    <button class="modal__close" data-drawer-close aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <h2 class="modal__title">{{ 'products.product.size_guide' | t }}</h2>
+
+    {%- if sg != blank -%}
+      <div class="simple-page__body" style="max-width:none;">{{ sg.content }}</div>
+    {%- else -%}
+      <div class="sizeguide__toggle">
+        <button type="button" data-unit="cm" class="is-active">CM</button>
+        <button type="button" data-unit="in">IN</button>
+      </div>
+      <table class="sg-table unit-cm">
+        <thead>
+          <tr><th>Size</th><th>Chest</th><th>Length</th><th>Shoulder</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>XS</td><td><span class="cm">104</span><span class="in">40.9</span></td><td><span class="cm">66</span><span class="in">26</span></td><td><span class="cm">52</span><span class="in">20.5</span></td></tr>
+          <tr><td>S</td><td><span class="cm">110</span><span class="in">43.3</span></td><td><span class="cm">69</span><span class="in">27.2</span></td><td><span class="cm">54</span><span class="in">21.3</span></td></tr>
+          <tr><td>M</td><td><span class="cm">116</span><span class="in">45.7</span></td><td><span class="cm">72</span><span class="in">28.3</span></td><td><span class="cm">56</span><span class="in">22</span></td></tr>
+          <tr><td>L</td><td><span class="cm">122</span><span class="in">48</span></td><td><span class="cm">75</span><span class="in">29.5</span></td><td><span class="cm">58</span><span class="in">22.8</span></td></tr>
+          <tr><td>XL</td><td><span class="cm">128</span><span class="in">50.4</span></td><td><span class="cm">78</span><span class="in">30.7</span></td><td><span class="cm">60</span><span class="in">23.6</span></td></tr>
+        </tbody>
+      </table>
+      <p class="sg-note">Measurements are of the garment, laid flat. The fit is intentionally oversized — size down for a closer cut.</p>
+    {%- endif -%}
+  </div>
+</div>
