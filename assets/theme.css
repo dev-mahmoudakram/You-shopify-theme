@@ -268,8 +268,8 @@ body.scroll-locked { overflow: hidden; }
   transition: border-color 0.25s, color 0.25s;
 }
 .card__size:hover { border-color: var(--sage); color: var(--sage); }
-.card__no-sizes { display: block; width: 100%; padding: 10px; text-align: center; background: var(--ink); color: var(--black); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; }
-.card__no-sizes:hover { background: var(--sage); }
+.card__no-sizes { display: block; width: 100%; padding: 10px; text-align: center; background: var(--white); color: var(--black); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; }
+.card__no-sizes:hover { background: #c7d1dd; }
 .card__info { padding-top: 14px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 .card__title { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
 .card__title a:hover { color: var(--sage); }
