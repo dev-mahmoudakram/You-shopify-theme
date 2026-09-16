@@ -15,7 +15,7 @@
           {%- elsif col.featured_image -%}
             <img src="{{ col.featured_image | image_url: width: 900 }}" alt="{{ col.title | escape }}" loading="lazy" width="900" height="1125">
           {%- else -%}
-            {%- assign demo = 'style1,style2,style3' | split: ',' -%}
+            {%- assign demo = 'look1,look2,look3-v2' | split: ',' -%}
             <img src="{{ demo[mod] | append: '.jpg' | asset_url }}" alt="" loading="lazy" width="900" height="1125">
           {%- endif -%}
           <div class="style-tile__veil"></div>

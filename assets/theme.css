@@ -810,6 +810,16 @@ body.scroll-locked { overflow: hidden; }
 .editorial__frame { box-shadow: 0 24px 60px rgba(27,42,59,.16); }
 
 .lookbook { background: #141214; padding: 136px 0; }
+.lookbook { color: #f8faff; }
+.lookbook .section-head { margin-bottom: 64px; }
+.lookbook .featured__head, .lookbook .section-head { border-color: rgba(248,250,255,.2); }
+.lookbook .featured__title { color: #f8faff; }
+.lookbook__grid { align-items: start; }
+.lookbook__item { border: 1px solid rgba(248,250,255,.10); }
+.lookbook__item--a { grid-column: span 4; }
+.lookbook__item--b { grid-column: span 2; }
+.lookbook__item--c { grid-column: span 2; }
+.lookbook__item--d { grid-column: span 4; }
 .lookbook__caption { background: linear-gradient(to top, rgba(8,11,15,.82), transparent); }
 .styles__grid { gap: 16px; }
 .style-tile { border-radius: 2px; }
@@ -817,7 +827,10 @@ body.scroll-locked { overflow: hidden; }
 .newdrop__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,12,18,.65), transparent 70%); pointer-events: none; }
 .newdrop__content { max-width: 505px; }
 .newdrop__title { font-size: clamp(3rem, 8vw, 7.5rem); }
-.fabric { background: #20242b; }
+.fabric { background: #20242b; color: #f8faff; }
+.fabric .featured__title, .fabric__name { color: #f8faff; }
+.fabric__desc { color: #b8c1cc; }
+.fabric__frame { background: #303943; }
 .reviews { background: #e0e7ef; padding: 118px 0; }
 .review { background: #f4f7fb; border-color: #c5cfdb; }
 .instagram { background: #cfd9e5; }

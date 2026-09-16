@@ -8,7 +8,8 @@
     <div class="lookbook__grid">
       {%- for block in section.blocks -%}
         {%- assign mod = forloop.index0 | modulo: 4 -%}
-        <figure class="lookbook__item reveal" {{ block.shopify_attributes }}>
+        {%- assign layout_slots = 'a,b,c,d' | split: ',' -%}
+        <figure class="lookbook__item lookbook__item--{{ layout_slots[mod] }} reveal" {{ block.shopify_attributes }}>
           {%- if block.settings.image != blank -%}
             <img src="{{ block.settings.image | image_url: width: 1200 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy" width="1200" height="900">
           {%- else -%}
