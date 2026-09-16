@@ -1,91 +1,299 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
-      "type": "hero"
+      "type": "hero",
+      "settings": {
+        "description": "For the dreamers, the doers, and the ones who choose their own path.",
+        "image": "shopify://shop_images/ChatGPT_Image_Sep_17_2026_02_35_09_AM.png",
+        "eyebrow": "New Season — FW26",
+        "heading_line_1": "Oversized.",
+        "heading_line_2": "Made Different.",
+        "cta_label": "Shop Collection",
+        "cta_link": "",
+        "link_label": "View Lookbook",
+        "link_url": ""
+      }
     },
-    "featured": {
+    "featured_collection_EhDGW3": {
       "type": "featured-collection",
+      "name": "Featured collection",
       "settings": {
         "eyebrow": "FW26 — Volume 03",
-        "heading": "Hoodies",
-        "count": 4,
-        "link_label": "View all"
+        "heading": "Latest Arrivals",
+        "collection": "frontpage",
+        "count": 8,
+        "link_label": "View all",
+        "link_url": ""
       }
     },
     "statement": {
-      "type": "brand-statement"
+      "type": "brand-statement",
+      "settings": {
+        "text_ar": "مصممة لتكون مختلفة",
+        "heading_line_1": "Designed to",
+        "heading_line_2": "be",
+        "heading_outline": "different.",
+        "body": "Every piece is designed around comfort, oversized silhouettes and distinctive visual details. Nothing decorative. Nothing extra.",
+        "marker": "YOU—03"
+      }
     },
     "editorial": {
-      "type": "editorial-story"
+      "type": "editorial-story",
+      "settings": {
+        "eyebrow": "FW26 Editorial",
+        "heading": "MADE TO STAND OUT.",
+        "line_1": "Cut from concrete weather,",
+        "line_2": "worn by whoever refuses",
+        "line_3": "to blend in."
+      }
     },
     "lookbook": {
       "type": "lookbook",
       "blocks": {
-        "l1": { "type": "look", "settings": { "caption": "Look 01" } },
-        "l2": { "type": "look", "settings": { "caption": "Look 02" } },
-        "l3": { "type": "look", "settings": { "caption": "Look 03" } },
-        "l4": { "type": "look", "settings": { "caption": "Look 04" } }
+        "l1": {
+          "type": "look",
+          "settings": {
+            "caption": "Look 01"
+          }
+        },
+        "l2": {
+          "type": "look",
+          "settings": {
+            "caption": "Look 02"
+          }
+        },
+        "l3": {
+          "type": "look",
+          "settings": {
+            "caption": "Look 03"
+          }
+        },
+        "l4": {
+          "type": "look",
+          "settings": {
+            "caption": "Look 04"
+          }
+        }
       },
-      "block_order": ["l1", "l2", "l3", "l4"]
+      "block_order": [
+        "l1",
+        "l2",
+        "l3",
+        "l4"
+      ],
+      "custom_css": [],
+      "settings": {
+        "eyebrow": "FW26 — Lookbook",
+        "heading": "The Season, Worn."
+      }
     },
     "styles": {
       "type": "shop-by-style",
       "blocks": {
-        "s1": { "type": "tile", "settings": { "heading": "Hoodies", "subheading": "Heavyweight fleece" } },
-        "s2": { "type": "tile", "settings": { "heading": "Sets", "subheading": "Matched volumes" } },
-        "s3": { "type": "tile", "settings": { "heading": "Essentials", "subheading": "Everyday base" } }
+        "s1": {
+          "type": "tile",
+          "settings": {
+            "collection": "",
+            "heading": "Hoodies",
+            "subheading": "Heavyweight fleece"
+          }
+        },
+        "s2": {
+          "type": "tile",
+          "settings": {
+            "collection": "",
+            "heading": "Sets",
+            "subheading": "Matched volumes"
+          }
+        },
+        "s3": {
+          "type": "tile",
+          "settings": {
+            "collection": "",
+            "heading": "Essentials",
+            "subheading": "Everyday base"
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"]
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "eyebrow": "Silhouettes",
+        "heading": "Shop By Style"
+      }
     },
     "newdrop": {
-      "type": "new-drop"
+      "type": "new-drop",
+      "settings": {
+        "eyebrow": "FW26 — Volume 03",
+        "heading": "NEW DROP",
+        "body": "Chapter three. Heavier fleece, sculpted wave panelling and a colder palette — built for the season's long nights.",
+        "cta_label": "Explore Collection",
+        "cta_link": "",
+        "link_label": "View the Lookbook",
+        "link_url": "",
+        "caption": "Campaign — Wave Hoodie 02 Glacier"
+      }
     },
     "bestsellers": {
       "type": "featured-collection",
       "settings": {
         "eyebrow": "Proven Pieces",
         "heading": "Essential Pieces",
+        "collection": "",
         "count": 4,
-        "link_label": "Shop all"
+        "link_label": "Shop all",
+        "link_url": ""
       }
     },
     "fabric": {
       "type": "fabric-quality",
       "blocks": {
-        "f1": { "type": "detail", "settings": { "number": "1", "name": "Fleece", "title": "480 GSM Loopback", "description": "Brushed inside, dense face. Holds its boxy shape wash after wash." } },
-        "f2": { "type": "detail", "settings": { "number": "2", "name": "Patch", "title": "Embroidered Mark", "description": "Raised stitch patch — the signature sewn on every piece." } },
-        "f3": { "type": "detail", "settings": { "number": "3", "name": "Seams", "title": "Wave Seams", "description": "Flat-locked wavy seams that read like a signature from across the room." } }
+        "f1": {
+          "type": "detail",
+          "settings": {
+            "number": "1",
+            "name": "Fleece",
+            "title": "480 GSM Loopback",
+            "description": "Brushed inside, dense face. Holds its boxy shape wash after wash."
+          }
+        },
+        "f2": {
+          "type": "detail",
+          "settings": {
+            "number": "2",
+            "name": "Patch",
+            "title": "Embroidered Mark",
+            "description": "Raised stitch patch — the signature sewn on every piece."
+          }
+        },
+        "f3": {
+          "type": "detail",
+          "settings": {
+            "number": "3",
+            "name": "Seams",
+            "title": "Wave Seams",
+            "description": "Flat-locked wavy seams that read like a signature from across the room."
+          }
+        }
       },
-      "block_order": ["f1", "f2", "f3"]
+      "block_order": [
+        "f1",
+        "f2",
+        "f3"
+      ],
+      "settings": {
+        "eyebrow": "Material",
+        "heading": "Built From Heavyweight."
+      }
     },
     "reviews": {
       "type": "reviews",
       "blocks": {
-        "r1": { "type": "review" },
-        "r2": { "type": "review", "settings": { "text": "Sizing chart is exact. Oversized the way it should be — sculpted, not sloppy.", "author": "Omar S.", "product": "Signal Hoodie" } },
-        "r3": { "type": "review", "settings": { "text": "You can feel the weight the second you lift it. Worth every dollar.", "author": "Lina M.", "product": "Wave Set Steel" } }
+        "r1": {
+          "type": "review",
+          "settings": {
+            "text": "The heaviest hoodie I own — the shape hasn't moved after months of wear.",
+            "author": "Karim A.",
+            "product": "Wave Hoodie 01"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "text": "Sizing chart is exact. Oversized the way it should be — sculpted, not sloppy.",
+            "author": "Omar S.",
+            "product": "Signal Hoodie"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "text": "You can feel the weight the second you lift it. Worth every dollar.",
+            "author": "Lina M.",
+            "product": "Wave Set Steel"
+          }
+        }
       },
-      "block_order": ["r1", "r2", "r3"]
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "eyebrow": "Worn & Verified",
+        "heading": "What They Say"
+      }
     },
     "instagram": {
       "type": "instagram-gallery",
       "blocks": {
-        "i1": { "type": "tile" },
-        "i2": { "type": "tile" },
-        "i3": { "type": "tile" },
-        "i4": { "type": "tile" },
-        "i5": { "type": "tile" },
-        "i6": { "type": "tile" }
+        "i1": {
+          "type": "tile",
+          "settings": {}
+        },
+        "i2": {
+          "type": "tile",
+          "settings": {}
+        },
+        "i3": {
+          "type": "tile",
+          "settings": {}
+        },
+        "i4": {
+          "type": "tile",
+          "settings": {}
+        },
+        "i5": {
+          "type": "tile",
+          "settings": {}
+        },
+        "i6": {
+          "type": "tile",
+          "settings": {}
+        }
       },
-      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6"]
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6"
+      ],
+      "settings": {
+        "eyebrow": "Community",
+        "heading": "@YOU.WEAR",
+        "handle": "@you.wear",
+        "link": ""
+      }
     },
     "newsletter": {
-      "type": "newsletter"
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "The Inner List",
+        "heading": "Join Before Everyone Else.",
+        "body": "Drops sell through in hours. Get the early link, the sizing memo and nothing else.",
+        "button_label": "Join",
+        "note": "No spam. Unsubscribe anytime."
+      }
     }
   },
   "order": [
     "hero",
-    "featured",
+    "featured_collection_EhDGW3",
     "statement",
     "editorial",
     "lookbook",
