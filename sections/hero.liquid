@@ -1,12 +1,12 @@
 {%- comment -%} YOU® — Hero: near full-screen editorial image {%- endcomment -%}
-<section class="hero">
+<section class="hero hero--lake">
   {%- if section.settings.image_mobile -%}
     <img
       class="hero__img hero__img--mobile"
       src="{{ section.settings.image_mobile | image_url: width: 1000 }}"
       srcset="{{ section.settings.image_mobile | image_url: width: 600 }} 600w, {{ section.settings.image_mobile | image_url: width: 1000 }} 1000w, {{ section.settings.image_mobile | image_url: width: 1400 }} 1400w"
       alt="{{ section.settings.image_mobile.alt | escape }}"
-      width="1000" fetchpriority="high">
+      width="1000" height="{{ section.settings.image_mobile.height }}" fetchpriority="high">
   {%- else -%}
     <img class="hero__img hero__img--mobile" src="{{ 'hero-v3-m.jpg' | asset_url }}" alt="{{ shop.name }} campaign" width="1024" height="1536" fetchpriority="high">
   {%- endif -%}
@@ -17,7 +17,7 @@
       src="{{ section.settings.image | image_url: width: 2000 }}"
       srcset="{{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1600 }} 1600w, {{ section.settings.image | image_url: width: 2000 }} 2000w"
       alt="{{ section.settings.image.alt | escape }}"
-      width="2000" fetchpriority="high">
+      width="2000" height="{{ section.settings.image.height }}" fetchpriority="high">
   {%- else -%}
     <img class="hero__img hero__img--desktop" src="{{ 'hero-v3.jpg' | asset_url }}" alt="{{ shop.name }} campaign" width="1600" height="901" fetchpriority="high">
   {%- endif -%}
@@ -31,6 +31,7 @@
         {{ section.settings.heading_line_1 | escape }}<br>
         {{ section.settings.heading_line_2 | escape }}
       </h1>
+      <p class="hero__description">{{ section.settings.description | default: 'For the dreamers, the doers, and the ones who choose their own path.' | escape }}</p>
       <div class="hero__cta">
         <a class="btn btn--light" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label | escape }}</a>
         {%- if section.settings.link_label != blank -%}
@@ -45,6 +46,7 @@
 {
   "name": "Hero",
   "settings": [
+    { "type": "textarea", "id": "description", "label": "Description", "default": "For the dreamers, the doers, and the ones who choose their own path." },
     { "type": "image_picker", "id": "image", "label": "Image — desktop (landscape)" },
     { "type": "image_picker", "id": "image_mobile", "label": "Image — mobile (portrait)" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Season — FW26" },

@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "name": "Brand identity",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "range", "id": "logo_width", "label": "Logo width", "min": 80, "max": 220, "step": 2, "default": 130 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" },
+      { "type": "textarea", "id": "footer_note", "label": "Footer note", "default": "Designed for the people who move differently." },
+      { "type": "text", "id": "footer_copyright", "label": "Copyright name", "default": "YOU. All rights reserved." }
+    ]
+  },
+  {
+    "name": "Social links",
+    "settings": [
+      { "type": "url", "id": "social_instagram_link", "label": "Instagram" },
+      { "type": "url", "id": "social_tiktok_link", "label": "TikTok" },
+      { "type": "url", "id": "social_x_link", "label": "X" },
+      { "type": "url", "id": "social_facebook_link", "label": "Facebook" }
+    ]
+  },
+  {
+    "name": "Shopping",
+    "settings": [
+      { "type": "range", "id": "free_shipping_threshold", "label": "Free shipping threshold", "min": 0, "max": 1000, "step": 10, "default": 150 },
+      { "type": "checkbox", "id": "cart_drawer_enabled", "label": "Enable cart drawer", "default": true }
+    ]
+  }
+]

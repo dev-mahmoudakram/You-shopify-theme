@@ -4,9 +4,9 @@
     <div class="footer__grid">
       <div class="footer__brand">
         {%- if settings.logo != blank -%}
-          <img src="{{ settings.logo | image_url: width: 440 }}" alt="{{ shop.name }}" loading="lazy">
+          <img src="{{ settings.logo | image_url: width: 440 }}" alt="{{ shop.name }}" width="130" height="40" loading="lazy">
         {%- else -%}
-          <img src="{{ 'logo-sage.png' | asset_url }}" alt="{{ shop.name }}" loading="lazy">
+          <img src="{{ 'logo-sage.png' | asset_url }}" alt="{{ shop.name }}" width="130" height="40" loading="lazy">
         {%- endif -%}
         <div class="footer__note">{{ settings.footer_note }}</div>
       </div>

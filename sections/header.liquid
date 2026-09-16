@@ -24,9 +24,9 @@
 
       <a class="header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} — home">
         {%- if settings.logo != blank -%}
-          <img src="{{ settings.logo | image_url: width: 440 }}" alt="{{ shop.name }}" width="{{ settings.logo_width | default: 130 }}" loading="eager" style="width:{{ settings.logo_width | default: 130 }}px;height:auto;">
+          <img src="{{ settings.logo | image_url: width: 440 }}" alt="{{ shop.name }}" width="{{ settings.logo_width | default: 130 }}" height="32" loading="eager" style="width:{{ settings.logo_width | default: 130 }}px;height:auto;">
         {%- else -%}
-          <img src="{{ 'logo-sage.png' | asset_url }}" alt="{{ shop.name }}" width="130" loading="eager" style="width:130px;height:auto;">
+          <img src="{{ 'logo-sage.png' | asset_url }}" alt="{{ shop.name }}" width="130" height="32" loading="eager" style="width:130px;height:auto;">
         {%- endif -%}
       </a>
 

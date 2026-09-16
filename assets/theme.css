@@ -10,15 +10,15 @@
 
 /* ---------- tokens ---------- */
 :root {
-  --paper: #0a0a0a;
-  --ink: #f2f2ef;
-  --mute: #8f8f89;
-  --line: #262624;
-  --raised: #161614;
-  --sage: #91a89a;
-  --sage-hover: #afc5b8;
-  --black: #000;
-  --white: #fff;
+  --paper: #eaf0f7;
+  --ink: #141214;
+  --mute: #636d79;
+  --line: #c7cfd9;
+  --raised: #dbe3ec;
+  --sage: #647385;
+  --sage-hover: #464c55;
+  --black: #141214;
+  --white: #f8faff;
   --container: 1440px;
   --pad: 20px;
   --font-sans: 'Inter', -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -66,9 +66,10 @@ body.scroll-locked { overflow: hidden; }
 
 /* ---------- typography ---------- */
 .display {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 0.98;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
   text-transform: uppercase;
 }
 .eyebrow {
@@ -195,7 +196,7 @@ body.scroll-locked { overflow: hidden; }
    HERO
    ============================================================ */
 .hero {
-  position: relative; height: 92vh; min-height: 560px; width: 100%;
+  position: relative; height: min(820px, calc(100vh - 34px)); min-height: 560px; width: 100%;
   overflow: hidden; background: var(--line);
 }
 .hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
@@ -207,18 +208,19 @@ body.scroll-locked { overflow: hidden; }
 }
 .hero__scrim {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.1) 45%, transparent);
+  background: linear-gradient(90deg, rgba(12,18,27,0.62), rgba(12,18,27,0.18) 60%, rgba(12,18,27,0.04)), linear-gradient(to top, rgba(9,15,23,0.34), transparent 48%);
 }
 .hero__content { position: absolute; left: 0; right: 0; bottom: 0; }
-.hero__inner { padding-bottom: 64px; }
+.hero__inner { padding-bottom: 64px; max-width: calc(var(--container) + 80px); }
 @media (min-width: 768px) { .hero__inner { padding-bottom: 96px; } }
 .hero__eyebrow { color: rgba(255,255,255,0.85); margin-bottom: 16px; }
 @media (min-width: 768px) { .hero__eyebrow { margin-bottom: 24px; } }
 .hero__title {
   color: var(--white);
-  font-size: 15vw;
+  font-size: 16vw;
 }
-@media (min-width: 768px) { .hero__title { font-size: clamp(3rem, 9vw, 8.5rem); } }
+@media (min-width: 768px) { .hero__title { font-size: clamp(4rem, 8vw, 7.8rem); max-width: 680px; } }
+.hero__description { color: rgba(248,250,255,.82); max-width: 335px; font-size: 14px; line-height: 1.7; margin: 25px 0 0; }
 .hero__cta { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
 @media (min-width: 768px) { .hero__cta { margin-top: 40px; } }
 .hero__link { color: rgba(255,255,255,0.8); font-size: 11px; text-transform: uppercase; letter-spacing: 0.28em; padding: 16px 0; }
@@ -771,3 +773,68 @@ body.scroll-locked { overflow: hidden; }
 @media (min-width: 768px) { .hide-mobile { display: inline-flex !important; } }
 .card__media-link { position: absolute; inset: 0; z-index: 1; }
 .collection-pagination .chip { display: inline-block; margin: 0 4px; }
+
+/* ============================================================
+   ATMOSPHERE — cool mineral light paired with deliberate darkness
+   ============================================================ */
+.header__logo img { filter: grayscale(1) brightness(.28); }
+.header__link { color: color-mix(in srgb, var(--ink) 78%, transparent); }
+.header.is-scrolled { background: color-mix(in srgb, var(--paper) 88%, transparent); }
+.btn { border-radius: 2px; min-height: 48px; }
+.btn--light { background: transparent; color: var(--white); border: 1px solid rgba(248,250,255,.72); }
+.btn--light:hover { background: var(--white); color: var(--black); }
+.btn--ink { background: var(--ink); color: var(--white); }
+.btn--ghost { border-color: var(--mute); }
+
+.collection-gallery { background: var(--paper); padding-top: 104px; padding-bottom: 120px; }
+.featured__head { border-bottom: 1px solid var(--line); padding-bottom: 23px; margin-bottom: 32px; }
+.featured__title { font-size: clamp(2.65rem, 6vw, 5.35rem); }
+.eyebrow--sage { color: var(--sage); font-weight: 600; }
+.card__media { background: #c8d0db; border-radius: 2px; }
+.card__badge { background: var(--white); color: var(--ink); }
+.card__quick { background: color-mix(in srgb, #141214 86%, transparent); }
+.card__info { padding: 14px 2px 0; }
+.card__title { letter-spacing: .12em; }
+.card__price { color: var(--sage); font-weight: 600; }
+
+.statement { background: #141214; color: #f8faff; padding: 150px 0; }
+.statement__dim { background: rgba(4,8,13,.54); }
+.statement__fade-top { background: linear-gradient(to bottom, #141214, transparent); }
+.statement__fade-bottom { background: linear-gradient(to top, #141214, rgba(20,18,20,.46), transparent); }
+.statement__body, .statement__ar, .statement__marker .tag { color: #b8c1cc; }
+.statement__marker .rule { background: rgba(232,240,247,.32); }
+
+.editorial--light { background: #dce5ee; color: #141214; padding: 150px 0; }
+.editorial--light .editorial__line { color: #536171; }
+.editorial--light .editorial__rule { background: #536171; }
+.editorial__frame { box-shadow: 0 24px 60px rgba(27,42,59,.16); }
+
+.lookbook { background: #141214; padding: 136px 0; }
+.lookbook__caption { background: linear-gradient(to top, rgba(8,11,15,.82), transparent); }
+.styles__grid { gap: 16px; }
+.style-tile { border-radius: 2px; }
+.newdrop { background: #141214; }
+.newdrop__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,12,18,.65), transparent 70%); pointer-events: none; }
+.newdrop__content { max-width: 505px; }
+.newdrop__title { font-size: clamp(3rem, 8vw, 7.5rem); }
+.fabric { background: #20242b; }
+.reviews { background: #e0e7ef; padding: 118px 0; }
+.review { background: #f4f7fb; border-color: #c5cfdb; }
+.instagram { background: #cfd9e5; }
+.newsletter { background: #7f8d9d; color: #101216; }
+.newsletter__btn { background: #141214; }
+.footer { background: #141214; border-top-color: #303641; }
+.footer__brand img { filter: grayscale(1) brightness(4); }
+
+@media (min-width: 768px) {
+  .collection-gallery { padding-top: 148px; padding-bottom: 160px; }
+  .product-grid { gap: 40px 20px; }
+  .statement { padding: 200px 0; }
+}
+@media (max-width: 767px) {
+  .hero { height: calc(100svh - 34px); min-height: 620px; }
+  .hero__description { max-width: 290px; }
+  .hero__cta { margin-top: 24px; }
+  .collection-gallery, .editorial--light { padding-top: 88px; padding-bottom: 88px; }
+  .statement { padding: 116px 0; }
+}

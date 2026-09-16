@@ -14,7 +14,7 @@
                 <td>
                   <div style="display:flex;gap:16px;align-items:center;">
                     {%- if item.image -%}
-                      <img src="{{ item.image | image_url: width: 160 }}" alt="" width="80" loading="lazy" style="aspect-ratio:3/4;object-fit:cover;">
+                <img src="{{ item.image | image_url: width: 160 }}" alt="" width="80" height="107" loading="lazy" style="aspect-ratio:3/4;object-fit:cover;">
                     {%- endif -%}
                     <div>
                       <a class="cart-line__title" href="{{ item.url }}">{{ item.product.title }}</a>

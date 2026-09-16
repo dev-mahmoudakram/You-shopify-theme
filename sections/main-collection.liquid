@@ -13,7 +13,6 @@
     <form class="toolbar__filters" method="get" action="{{ collection.url }}" id="FacetForm">
       <span class="toolbar__label">Filter</span>
       {%- if section.settings.sort_by_tags and collection.all_tags.size > 0 -%}
-        {%- assign current_tags_handleized = current_tags | join: ',' | handleize -%}
         {%- for tag in collection.all_tags -%}
           <label class="chip {% if current_tags contains tag %}is-active{% endif %}">
             <input type="checkbox" name="constraint" value="{{ tag | handleize }}" {% if current_tags contains tag %}checked{% endif %} onchange="this.form.submit()" hidden>

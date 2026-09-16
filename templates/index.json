@@ -7,8 +7,8 @@
       "type": "featured-collection",
       "settings": {
         "eyebrow": "FW26 — Volume 03",
-        "heading": "Latest Arrivals",
-        "count": 8,
+        "heading": "Hoodies",
+        "count": 4,
         "link_label": "View all"
       }
     },
@@ -44,7 +44,7 @@
       "type": "featured-collection",
       "settings": {
         "eyebrow": "Proven Pieces",
-        "heading": "Best Sellers",
+        "heading": "Essential Pieces",
         "count": 4,
         "link_label": "Shop all"
       }
