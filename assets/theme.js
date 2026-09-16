@@ -329,7 +329,10 @@
               .catch(function (e) { btn.classList.remove('is-disabled'); toast(e.message); });
           });
         });
-      }).catch(function () { loaded = false; });
+      }).catch(function () {
+        loaded = false;
+        sizesBox.innerHTML = '<a class="card__no-sizes" href="/products/' + handle + '">Choose options</a>';
+      });
     };
     var media = quick.closest('.card__media');
     if (media) {
@@ -337,6 +340,7 @@
       media.addEventListener('touchstart', load, { passive: true });
       media.addEventListener('focusin', load);
     }
+    load();
   });
 
   /* ----------------------------------------------------------

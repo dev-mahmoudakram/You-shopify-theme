@@ -26,7 +26,7 @@
     {%- if product.available -%}
       <div class="card__quick" data-handle="{{ product.handle }}">
         <p class="card__quick-label">{{ 'products.product.quick_add' | t }}</p>
-        <div class="card__sizes"></div>
+        <div class="card__sizes"><span class="card__quick-loading">Loading options</span></div>
       </div>
     {%- endif -%}
   </div>

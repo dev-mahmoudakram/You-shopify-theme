@@ -7,8 +7,6 @@
       srcset="{{ section.settings.image_mobile | image_url: width: 600 }} 600w, {{ section.settings.image_mobile | image_url: width: 1000 }} 1000w, {{ section.settings.image_mobile | image_url: width: 1400 }} 1400w"
       alt="{{ section.settings.image_mobile.alt | escape }}"
       width="1000" height="{{ section.settings.image_mobile.height }}" fetchpriority="high">
-  {%- else -%}
-    <img class="hero__img hero__img--mobile" src="{{ 'hero-v3-m.jpg' | asset_url }}" alt="{{ shop.name }} campaign" width="1024" height="1536" fetchpriority="high">
   {%- endif -%}
 
   {%- if section.settings.image -%}
@@ -18,28 +16,29 @@
       srcset="{{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1600 }} 1600w, {{ section.settings.image | image_url: width: 2000 }} 2000w"
       alt="{{ section.settings.image.alt | escape }}"
       width="2000" height="{{ section.settings.image.height }}" fetchpriority="high">
-  {%- else -%}
-    <img class="hero__img hero__img--desktop" src="{{ 'hero-v3.jpg' | asset_url }}" alt="{{ shop.name }} campaign" width="1600" height="901" fetchpriority="high">
   {%- endif -%}
 
-  <div class="hero__scrim"></div>
+  {%- assign has_hero_media = false -%}
+  {%- if section.settings.image != blank or section.settings.image_mobile != blank -%}{%- assign has_hero_media = true -%}{%- endif -%}
+  <div class="hero__scrim"{% unless has_hero_media %} hidden{% endunless %}></div>
 
-  <div class="hero__content">
+  {%- if has_hero_media -%}<div class="hero__content">
     <div class="container hero__inner">
-      <p class="eyebrow hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      <h1 class="display hero__title">
-        {{ section.settings.heading_line_1 | escape }}<br>
-        {{ section.settings.heading_line_2 | escape }}
-      </h1>
-      <p class="hero__description">{{ section.settings.description | default: 'For the dreamers, the doers, and the ones who choose their own path.' | escape }}</p>
-      <div class="hero__cta">
-        <a class="btn btn--light" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label | escape }}</a>
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
+        <h1 class="display hero__title">
+          {{ section.settings.heading_line_1 | escape }}{% if section.settings.heading_line_1 != blank and section.settings.heading_line_2 != blank %}<br>{% endif %}{{ section.settings.heading_line_2 | escape }}
+        </h1>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}<p class="hero__description">{{ section.settings.description | escape }}</p>{%- endif -%}
+      {%- if section.settings.cta_label != blank or section.settings.link_label != blank -%}<div class="hero__cta">
+        {%- if section.settings.cta_label != blank -%}<a class="btn btn--light" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label | escape }}</a>{%- endif -%}
         {%- if section.settings.link_label != blank -%}
           <a class="hero__link link-underline" href="{{ section.settings.link_url | default: routes.root_url }}">{{ section.settings.link_label | escape }}</a>
         {%- endif -%}
-      </div>
+      </div>{%- endif -%}
     </div>
-  </div>
+  </div>{%- endif -%}
 </section>
 
 {% schema %}
