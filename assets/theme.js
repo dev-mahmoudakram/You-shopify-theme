@@ -17,9 +17,16 @@
     return fmt.replace(/\{\{\s*amount\s*\}\}/, amount).replace(/\{\{\s*amount_no_decimals\s*\}\}/, Math.round(cents / 100));
   }
 
-  function toast(msg) {
+  function toast(msg, type) {
     var el = $('.toast');
-    if (!el) { el = document.createElement('div'); el.className = 'toast'; document.body.appendChild(el); }
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'toast';
+      document.body.appendChild(el);
+    }
+    el.classList.toggle('toast--error', type === 'error');
+    el.setAttribute('role', type === 'error' ? 'alert' : 'status');
+    el.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
     el.textContent = msg;
     el.classList.add('is-visible');
     clearTimeout(el._t);
@@ -297,7 +304,7 @@
         var span = $('.cart-line__qty span', line);
         cartChange(line.getAttribute('data-line'), parseInt(span.textContent, 10) + 1)
           .then(function (c) { renderCartDrawer(c); })
-          .catch(function () { toast('Could not update'); });
+          .catch(function () { toast('Could not update', 'error'); });
       });
     });
     $$('[data-qty-minus]', itemsBox).forEach(function (btn) {
@@ -307,7 +314,7 @@
         var next = parseInt(span.textContent, 10) - 1;
         cartChange(line.getAttribute('data-line'), next)
           .then(function (c) { renderCartDrawer(c); })
-          .catch(function () { toast('Could not update'); });
+          .catch(function () { toast('Could not update', 'error'); });
       });
     });
     $$('[data-line-remove]', itemsBox).forEach(function (btn) {
@@ -315,7 +322,7 @@
         var line = btn.closest('.cart-line');
         cartChange(line.getAttribute('data-line'), 0)
           .then(function (c) { renderCartDrawer(c); })
-          .catch(function () { toast('Could not update'); });
+          .catch(function () { toast('Could not update', 'error'); });
       });
     });
   }
@@ -371,7 +378,7 @@
             btn.disabled = true;
             cartAdd(btn.getAttribute('data-variant'), 1)
               .then(function () { btn.classList.remove('is-disabled'); btn.disabled = false; openCart(); })
-              .catch(function (e) { btn.classList.remove('is-disabled'); btn.disabled = false; toast(e.message); });
+              .catch(function (e) { btn.classList.remove('is-disabled'); btn.disabled = false; toast(e.message, 'error'); });
           });
         });
         $$('[data-size]', sizesBox).forEach(function (btn) {
@@ -382,12 +389,12 @@
             var variant = product.variants.filter(function (v) {
               return v.available && v.options[sizeIdx] === size;
             })[0];
-            if (!variant) { toast('Size unavailable'); return; }
+            if (!variant) { toast('Size unavailable', 'error'); return; }
             btn.classList.add('is-disabled');
             btn.disabled = true;
             cartAdd(variant.id, 1)
               .then(function () { btn.classList.remove('is-disabled'); btn.disabled = false; openCart(); })
-              .catch(function (e) { btn.classList.remove('is-disabled'); btn.disabled = false; toast(e.message); });
+              .catch(function (e) { btn.classList.remove('is-disabled'); btn.disabled = false; toast(e.message, 'error'); });
           });
         });
       }).catch(function () {
@@ -470,6 +477,9 @@
         selected[idx] = pill.getAttribute('data-value');
         $$('.pill[data-option="' + name + '"]', pdp).forEach(function (p) { p.classList.remove('is-active'); });
         pill.classList.add('is-active');
+        $$('.pill[data-option="' + name + '"]', pdp).forEach(function (p) {
+          p.setAttribute('aria-pressed', p === pill ? 'true' : 'false');
+        });
         var valueEl = $('[data-option-value="' + name + '"]', pdp);
         if (valueEl) valueEl.textContent = pill.getAttribute('data-value');
         refresh();
@@ -512,7 +522,7 @@
             } else {
               atcBtn.disabled = false;
             }
-            toast(e.message || 'Unable to add');
+            toast(e.message || 'Unable to add', 'error');
           });
       });
     }
@@ -571,8 +581,12 @@
   if (sizeGuide) {
     $$('[data-unit]', sizeGuide).forEach(function (btn) {
       btn.addEventListener('click', function () {
-        $$('[data-unit]', sizeGuide).forEach(function (b) { b.classList.remove('is-active'); });
+        $$('[data-unit]', sizeGuide).forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
         var table = $('.sg-table', sizeGuide);
         if (table) table.className = 'sg-table unit-' + btn.getAttribute('data-unit');
       });

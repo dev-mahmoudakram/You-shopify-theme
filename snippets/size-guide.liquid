@@ -12,8 +12,8 @@
       <div class="simple-page__body" style="max-width:none;">{{ sg.content }}</div>
     {%- else -%}
       <div class="sizeguide__toggle">
-        <button type="button" data-unit="cm" class="is-active">CM</button>
-        <button type="button" data-unit="in">IN</button>
+        <button type="button" data-unit="cm" class="is-active" aria-pressed="true">CM</button>
+        <button type="button" data-unit="in" aria-pressed="false">IN</button>
       </div>
       <table class="sg-table unit-cm">
         <thead>

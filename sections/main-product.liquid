@@ -55,7 +55,8 @@
                     type="button"
                     class="pill {% if option.selected_value == value %}is-active{% endif %}"
                     data-option="{{ option.name | escape }}"
-                    data-value="{{ value | escape }}">
+                    data-value="{{ value | escape }}"
+                    aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}">
                     {{ value }}
                   </button>
                 {%- endfor -%}
@@ -125,7 +126,7 @@
           {%- if block.type == 'detail' -%}
             <div {{ block.shopify_attributes }}>
               <p class="pdp-detail__num">{{ block.settings.number | escape }}</p>
-              <h3 class="fabric__name">{{ block.settings.title | escape }}</h3>
+              <h3 class="pdp-detail__title">{{ block.settings.title | escape }}</h3>
               <p class="pdp-detail__text">{{ block.settings.text | escape }}</p>
             </div>
           {%- endif -%}

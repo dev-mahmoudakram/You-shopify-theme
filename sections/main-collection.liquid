@@ -15,7 +15,7 @@
       {%- if section.settings.sort_by_tags and collection.all_tags.size > 0 -%}
         {%- for tag in collection.all_tags -%}
           <label class="chip {% if current_tags contains tag %}is-active{% endif %}">
-            <input type="checkbox" name="constraint" value="{{ tag | handleize }}" {% if current_tags contains tag %}checked{% endif %} onchange="this.form.submit()" hidden>
+            <input class="visually-hidden" type="checkbox" name="constraint" value="{{ tag | handleize }}" {% if current_tags contains tag %}checked{% endif %} onchange="this.form.submit()">
             {{ tag }}
           </label>
         {%- endfor -%}
