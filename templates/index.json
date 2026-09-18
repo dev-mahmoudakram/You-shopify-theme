@@ -47,56 +47,6 @@
         "marker": "YOU—03"
       }
     },
-    "editorial": {
-      "type": "editorial-story",
-      "settings": {
-        "eyebrow": "FW26 Editorial",
-        "heading": "MADE TO STAND OUT.",
-        "line_1": "Cut from concrete weather,",
-        "line_2": "worn by whoever refuses",
-        "line_3": "to blend in."
-      }
-    },
-    "lookbook": {
-      "type": "lookbook",
-      "blocks": {
-        "l1": {
-          "type": "look",
-          "settings": {
-            "caption": "Look 01"
-          }
-        },
-        "l2": {
-          "type": "look",
-          "settings": {
-            "caption": "Look 02"
-          }
-        },
-        "l3": {
-          "type": "look",
-          "settings": {
-            "caption": "Look 03"
-          }
-        },
-        "l4": {
-          "type": "look",
-          "settings": {
-            "caption": "Look 04"
-          }
-        }
-      },
-      "block_order": [
-        "l1",
-        "l2",
-        "l3",
-        "l4"
-      ],
-      "custom_css": [],
-      "settings": {
-        "eyebrow": "FW26 — Lookbook",
-        "heading": "The Season, Worn."
-      }
-    },
     "styles": {
       "type": "shop-by-style",
       "blocks": {
@@ -133,19 +83,6 @@
       "settings": {
         "eyebrow": "Silhouettes",
         "heading": "Shop By Style"
-      }
-    },
-    "newdrop": {
-      "type": "new-drop",
-      "settings": {
-        "eyebrow": "FW26 — Volume 03",
-        "heading": "NEW DROP",
-        "body": "Chapter three. Heavier fleece, sculpted wave panelling and a colder palette — built for the season's long nights.",
-        "cta_label": "Explore Collection",
-        "cta_link": "",
-        "link_label": "View the Lookbook",
-        "link_url": "",
-        "caption": "Campaign — Wave Hoodie 02 Glacier"
       }
     },
     "bestsellers": {
@@ -296,10 +233,7 @@
     "hero",
     "featured_collection_EhDGW3",
     "statement",
-    "editorial",
-    "lookbook",
     "styles",
-    "newdrop",
     "bestsellers",
     "fabric",
     "reviews",
