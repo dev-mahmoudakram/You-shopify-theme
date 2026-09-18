@@ -140,23 +140,80 @@
      ---------------------------------------------------------- */
   var cartDrawer = $('#cart-drawer');
 
+  function storefrontUrl(path) {
+    var root = CFG.routesRoot || '/';
+    return root.replace(/\/$/, '') + '/' + path.replace(/^\//, '');
+  }
+
+  function cartErrorMessage(error) {
+    var text = String((error.data && (error.data.description || error.data.message)) || error.message || '').toLowerCase();
+    if (/sold out|not available/.test(text)) return 'This variant is sold out.';
+    if (/inventory|stock|quantity|maximum/.test(text)) return 'The requested quantity is not available.';
+    if (/variant|product/.test(text)) return 'This product option is no longer available.';
+    return 'Unable to add this item. Please try again.';
+  }
+
+  function CartError(message, status, data) {
+    this.name = 'CartError';
+    this.message = message;
+    this.status = status;
+    this.data = data;
+  }
+  CartError.prototype = Object.create(Error.prototype);
+  CartError.prototype.constructor = CartError;
+
+  function normalizeVariantId(id) {
+    // Theme product JSON supplies numeric Ajax API IDs. Support a Storefront API
+    // ProductVariant GID only when one is explicitly passed by another caller.
+    if (typeof id === 'string' && /^gid:\/\/shopify\/ProductVariant\/\d+$/.test(id)) {
+      id = id.split('/').pop();
+    }
+    var normalized = String(id == null ? '' : id).trim();
+    if (!/^\d+$/.test(normalized) || normalized === '0') return null;
+    return normalized;
+  }
+
+  function readJson(response) {
+    return response.text().then(function (text) {
+      if (!text) return null;
+      try { return JSON.parse(text); } catch (_) { return { description: text }; }
+    });
+  }
+
   function getCart() {
-    return fetch('/cart.js', { headers: { 'Accept': 'application/json' } }).then(function (r) { return r.json(); });
+    return fetch(storefrontUrl('cart.js'), { headers: { 'Accept': 'application/json' } }).then(function (r) {
+      return readJson(r).then(function (data) {
+        if (!r.ok) throw new CartError('Unable to load cart.', r.status, data);
+        return data;
+      });
+    });
   }
 
   function cartAdd(id, qty) {
-    return fetch('/cart/add.js', {
+    var variantId = normalizeVariantId(id);
+    var quantity = Number(qty);
+    if (!variantId) return Promise.reject(new CartError('Invalid variant ID.', 0, { id: id }));
+    if (!Number.isInteger(quantity) || quantity < 1) return Promise.reject(new CartError('Invalid quantity.', 0, { quantity: qty }));
+    var payload = { items: [{ id: variantId, quantity: quantity }] };
+    return fetch(storefrontUrl('cart/add.js'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ items: [{ id: id, quantity: qty || 1 }] })
+      body: JSON.stringify(payload)
     }).then(function (r) {
-      if (!r.ok) return r.json().then(function (err) { throw new Error(err.description || 'Unable to add'); });
-      return r.json();
+      return readJson(r).then(function (data) {
+        if (!r.ok) {
+          // Keep Shopify's response available in DevTools; do not replace it with
+          // an opaque HTTP status, which hides the actual cause of a 422.
+          console.error('Shopify cart error', { status: r.status, payload: payload, data: data });
+          throw new CartError(cartErrorMessage({ data: data }), r.status, data);
+        }
+        return data;
+      });
     });
   }
 
   function cartChange(lineKey, qty) {
-    return fetch('/cart/change.js', {
+    return fetch(storefrontUrl('cart/change.js'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ id: String(lineKey), quantity: qty })
@@ -283,7 +340,7 @@
 
   function fetchProduct(handle) {
     if (productCache[handle]) return Promise.resolve(productCache[handle]);
-    return fetch('/products/' + handle + '.js', { headers: { 'Accept': 'application/json' } })
+    return fetch(storefrontUrl('products/' + encodeURIComponent(handle) + '.js'), { headers: { 'Accept': 'application/json' } })
       .then(function (r) { return r.json(); })
       .then(function (p) { productCache[handle] = p; return p; });
   }
@@ -309,14 +366,17 @@
         }
         $$('[data-variant]', sizesBox).forEach(function (btn) {
           btn.addEventListener('click', function () {
+            if (btn.disabled) return;
             btn.classList.add('is-disabled');
+            btn.disabled = true;
             cartAdd(btn.getAttribute('data-variant'), 1)
-              .then(function () { btn.classList.remove('is-disabled'); openCart(); })
-              .catch(function (e) { btn.classList.remove('is-disabled'); toast(e.message); });
+              .then(function () { btn.classList.remove('is-disabled'); btn.disabled = false; openCart(); })
+              .catch(function (e) { btn.classList.remove('is-disabled'); btn.disabled = false; toast(e.message); });
           });
         });
         $$('[data-size]', sizesBox).forEach(function (btn) {
           btn.addEventListener('click', function () {
+            if (btn.disabled) return;
             var size = btn.getAttribute('data-size');
             var sizeIdx = product.options.indexOf(sizeOption);
             var variant = product.variants.filter(function (v) {
@@ -324,9 +384,10 @@
             })[0];
             if (!variant) { toast('Size unavailable'); return; }
             btn.classList.add('is-disabled');
+            btn.disabled = true;
             cartAdd(variant.id, 1)
-              .then(function () { btn.classList.remove('is-disabled'); openCart(); })
-              .catch(function (e) { btn.classList.remove('is-disabled'); toast(e.message); });
+              .then(function () { btn.classList.remove('is-disabled'); btn.disabled = false; openCart(); })
+              .catch(function (e) { btn.classList.remove('is-disabled'); btn.disabled = false; toast(e.message); });
           });
         });
       }).catch(function () {
@@ -434,15 +495,23 @@
     // ATC
     if (atcBtn) {
       atcBtn.addEventListener('click', function () {
-        if (atcBtn.disabled) return;
+        if (atcBtn.disabled || atcBtn.classList.contains('is-disabled')) return;
         atcBtn.classList.add('is-disabled');
+        atcBtn.disabled = true;
         cartAdd(idInput.value, parseInt(($('[data-qty-input]', pdp) || {}).value || 1, 10))
           .then(function () {
             atcBtn.classList.remove('is-disabled');
+            atcBtn.disabled = false;
             openCart();
           })
           .catch(function (e) {
             atcBtn.classList.remove('is-disabled');
+            if (cartErrorMessage(e) === 'This variant is sold out.') {
+              atcBtn.disabled = true;
+              atcBtn.textContent = 'Sold out';
+            } else {
+              atcBtn.disabled = false;
+            }
             toast(e.message || 'Unable to add');
           });
       });
@@ -454,7 +523,7 @@
       buyBtn.addEventListener('click', function () {
         var form = document.createElement('form');
         form.method = 'post';
-        form.action = '/cart/add';
+        form.action = storefrontUrl('cart/add');
         var inputId = document.createElement('input');
         inputId.type = 'hidden'; inputId.name = 'id'; inputId.value = idInput.value;
         var inputQ = document.createElement('input');

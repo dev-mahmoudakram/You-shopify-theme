@@ -63,6 +63,7 @@
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
       window.YOU = {
+        routesRoot: {{ routes.root_url | json }},
         moneyFormat: {{ shop.money_format | json }},
         freeShippingThreshold: {{ settings.free_shipping_threshold | default: 150 | times: 100 }},
         cartDrawer: {{ settings.cart_drawer_enabled | default: true | json }},
