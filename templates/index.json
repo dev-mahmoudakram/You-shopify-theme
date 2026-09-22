@@ -26,12 +26,25 @@
     },
     "bestsellers": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "eyebrow": "Proven Pieces",
         "heading": "Essential Pieces",
         "collection": "",
         "count": 4,
         "link_label": "Shop all",
+        "link_url": ""
+      }
+    },
+    "featured_collection_3mHGmT": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "eyebrow": "FW26 — Volume 03",
+        "heading": "Latest Arrivals",
+        "collection": "winter-is-coming",
+        "count": 8,
+        "link_label": "View all",
         "link_url": ""
       }
     },
@@ -220,6 +233,7 @@
   "order": [
     "hero",
     "bestsellers",
+    "featured_collection_3mHGmT",
     "statement",
     "styles",
     "fabric",
