@@ -92,6 +92,7 @@
         "s2",
         "s3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Silhouettes",
         "heading": "Shop By Style"
