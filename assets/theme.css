@@ -197,34 +197,46 @@ body.scroll-locked { overflow: hidden; }
    HERO
    ============================================================ */
 .hero {
-  position: relative; height: min(820px, calc(100vh - 34px)); min-height: 560px; width: 100%;
-  overflow: hidden; background: var(--line);
+  position: relative; width: 100%; overflow: hidden; background: var(--ink);
 }
-.hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero__img { width: 100%; height: clamp(300px, 43svh, 480px); object-fit: cover; object-position: center; }
 .hero__img--mobile { display: block; }
 .hero__img--desktop { display: none; }
 @media (min-width: 768px) {
+  .hero { min-height: min(850px, calc(100svh - 98px)); display: flex; align-items: center; }
+  .hero__img { position: absolute; inset: 0; height: 100%; }
   .hero__img--mobile { display: none; }
   .hero__img--desktop { display: block; }
 }
 .hero__scrim {
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(12,18,27,0.62), rgba(12,18,27,0.18) 60%, rgba(12,18,27,0.04)), linear-gradient(to top, rgba(9,15,23,0.34), transparent 48%);
+  display: none;
 }
-.hero__content { position: absolute; left: 0; right: 0; bottom: 0; }
-.hero__inner { padding-bottom: 64px; max-width: calc(var(--container) + 80px); }
-@media (min-width: 768px) { .hero__inner { padding-bottom: 96px; } }
-.hero__eyebrow { color: rgba(255,255,255,0.85); margin-bottom: 16px; }
-@media (min-width: 768px) { .hero__eyebrow { margin-bottom: 24px; } }
+.hero__content { position: relative; z-index: 1; width: 100%; color: var(--white); }
+.hero__inner { padding-top: 44px; padding-bottom: 56px; }
+.hero__copy { max-width: 640px; }
+.hero__eyebrow { color: rgba(255,255,255,0.8); margin: 0 0 18px; }
 .hero__title {
-  color: var(--white);
-  font-size: 16vw;
+  color: var(--white); font-size: clamp(2.25rem, 8vw, 3rem);
+  line-height: 1.1; letter-spacing: -0.04em; text-transform: none; margin: 0;
 }
-@media (min-width: 768px) { .hero__title { font-size: clamp(4rem, 8vw, 7.8rem); max-width: 680px; } }
-.hero__description { color: rgba(248,250,255,.82); max-width: 335px; font-size: 14px; line-height: 1.7; margin: 25px 0 0; }
-.hero__cta { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
-@media (min-width: 768px) { .hero__cta { margin-top: 40px; } }
+.hero__description, .hero__values, .hero__closing {
+  color: rgba(248,250,255,.86); font-size: 14px; line-height: 1.7;
+}
+.hero__description { margin: 24px 0 0; }
+.hero__values { margin: 20px 0 0; }
+.hero__closing { margin: 12px 0 0; }
+.hero__values em, .hero__signature em { font-style: italic; }
+.hero__signature { margin: 25px 0 0; font-size: 11px; letter-spacing: 0.2em; }
+.hero__cta { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
 .hero__link { color: rgba(255,255,255,0.8); font-size: 11px; text-transform: uppercase; letter-spacing: 0.28em; padding: 16px 0; }
+@media (min-width: 768px) {
+  .hero__scrim { display: block; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(9,15,23,.88), rgba(9,15,23,.62) 48%, rgba(9,15,23,.08) 100%); }
+  .hero__inner { padding-top: 72px; padding-bottom: 72px; max-width: calc(var(--container) + 80px); }
+  .hero__copy { max-width: 690px; }
+  .hero__title { font-size: clamp(2.8rem, 4vw, 4rem); }
+  .hero__description, .hero__values, .hero__closing { font-size: 15px; }
+  .hero__cta { margin-top: 36px; }
+}
 
 /* ============================================================
    PRODUCT CARD + GRID
@@ -835,9 +847,6 @@ body.scroll-locked { overflow: hidden; }
   .statement { padding: 200px 0; }
 }
 @media (max-width: 767px) {
-  .hero { height: calc(100svh - 34px); min-height: 620px; }
-  .hero__description { max-width: 290px; }
-  .hero__cta { margin-top: 24px; }
   .collection-gallery, .editorial--light { padding-top: 88px; padding-bottom: 88px; }
   .statement { padding: 116px 0; }
 }

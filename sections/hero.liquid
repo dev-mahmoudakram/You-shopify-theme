@@ -22,35 +22,46 @@
   {%- if section.settings.image != blank or section.settings.image_mobile != blank -%}{%- assign has_hero_media = true -%}{%- endif -%}
   <div class="hero__scrim"{% unless has_hero_media %} hidden{% endunless %}></div>
 
-  {%- if has_hero_media -%}<div class="hero__content">
+  <div class="hero__content">
     <div class="container hero__inner">
-      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-      {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
-        <h1 class="display hero__title">
-          {{ section.settings.heading_line_1 | escape }}{% if section.settings.heading_line_1 != blank and section.settings.heading_line_2 != blank %}<br>{% endif %}{{ section.settings.heading_line_2 | escape }}
-        </h1>
-      {%- endif -%}
-      {%- if section.settings.description != blank -%}<p class="hero__description">{{ section.settings.description | escape }}</p>{%- endif -%}
-      {%- if section.settings.cta_label != blank or section.settings.link_label != blank -%}<div class="hero__cta">
-        {%- if section.settings.cta_label != blank -%}<a class="btn btn--light" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label | escape }}</a>{%- endif -%}
-        {%- if section.settings.link_label != blank -%}
-          <a class="hero__link link-underline" href="{{ section.settings.link_url | default: routes.root_url }}">{{ section.settings.link_label | escape }}</a>
+      <div class="hero__copy">
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
+          <h1 class="display hero__title">
+            {{ section.settings.heading_line_1 | escape }}{% if section.settings.heading_line_1 != blank and section.settings.heading_line_2 != blank %}<br>{% endif %}{{ section.settings.heading_line_2 | escape }}
+          </h1>
         {%- endif -%}
-      </div>{%- endif -%}
+        {%- if section.settings.description != blank -%}<p class="hero__description">{{ section.settings.description | escape | newline_to_br }}</p>{%- endif -%}
+        {%- if section.settings.values_intro != blank or section.settings.values_emphasis != blank -%}
+          <p class="hero__values">{{ section.settings.values_intro | escape }}{% if section.settings.values_intro != blank and section.settings.values_emphasis != blank %} {% endif %}{% if section.settings.values_emphasis != blank %}<em>{{ section.settings.values_emphasis | escape }}</em>{% endif %}</p>
+        {%- endif -%}
+        {%- if section.settings.closing_line != blank -%}<p class="hero__closing">{{ section.settings.closing_line | escape }}</p>{%- endif -%}
+        {%- if section.settings.signature != blank -%}<p class="hero__signature"><em>{{ section.settings.signature | escape }}</em></p>{%- endif -%}
+        {%- if section.settings.cta_label != blank or section.settings.link_label != blank -%}<div class="hero__cta">
+          {%- if section.settings.cta_label != blank -%}<a class="btn btn--light" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">{{ section.settings.cta_label | escape }}</a>{%- endif -%}
+          {%- if section.settings.link_label != blank -%}
+            <a class="hero__link link-underline" href="{{ section.settings.link_url | default: routes.root_url }}">{{ section.settings.link_label | escape }}</a>
+          {%- endif -%}
+        </div>{%- endif -%}
+      </div>
     </div>
-  </div>{%- endif -%}
+  </div>
 </section>
 
 {% schema %}
 {
   "name": "Hero",
   "settings": [
-    { "type": "textarea", "id": "description", "label": "Description", "default": "For the dreamers, the doers, and the ones who choose their own path." },
+    { "type": "textarea", "id": "description", "label": "Origin and design lines", "default": "Made in Egypt.\nBuilt with high-quality materials.\nDesigned for those who don’t follow the usual." },
+    { "type": "text", "id": "values_intro", "label": "Values sentence", "default": "At YOU, we create pieces that bring together" },
+    { "type": "text", "id": "values_emphasis", "label": "Values emphasis", "default": "quality, design, and attitude." },
+    { "type": "text", "id": "closing_line", "label": "Closing line", "default": "Every piece is made to feel like you." },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "YOU,JUST FOR YOU" },
     { "type": "image_picker", "id": "image", "label": "Image — desktop (landscape)" },
     { "type": "image_picker", "id": "image_mobile", "label": "Image — mobile (portrait)" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New Season — FW26" },
-    { "type": "text", "id": "heading_line_1", "label": "Heading — line 1", "default": "Oversized." },
-    { "type": "text", "id": "heading_line_2", "label": "Heading — line 2", "default": "Made Different." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading — line 1", "default": "YOU isn’t just what you wear." },
+    { "type": "text", "id": "heading_line_2", "label": "Heading — line 2", "default": "It’s how you express who you are." },
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop Collection" },
     { "type": "url", "id": "cta_link", "label": "Button link" },
     { "type": "text", "id": "link_label", "label": "Secondary link label", "default": "View Lookbook" },
