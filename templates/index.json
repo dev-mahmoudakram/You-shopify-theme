@@ -79,6 +79,7 @@
         "s2",
         "s3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Silhouettes",
         "heading": "Shop By Style"
@@ -120,6 +121,7 @@
         "f2",
         "f3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Material",
         "heading": "Built From Heavyweight."
