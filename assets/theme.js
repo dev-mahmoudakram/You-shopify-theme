@@ -412,7 +412,7 @@
   });
 
   /* ----------------------------------------------------------
-     PDP — variant picker + gallery + accordions + size guide
+     PDP — variant picker + gallery + accordions
      ---------------------------------------------------------- */
   var pdp = $('[data-product-form]');
   if (pdp) {
@@ -567,31 +567,6 @@
       input.value = Math.min(9, parseInt(input.value || 1, 10) + 1);
     });
   });
-
-  /* ----------------------------------------------------------
-     Size guide modal
-     ---------------------------------------------------------- */
-  var sizeGuide = $('#size-guide');
-  $$('[data-open-size-guide]').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      openOverlay(sizeGuide);
-    });
-  });
-  if (sizeGuide) {
-    $$('[data-unit]', sizeGuide).forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        $$('[data-unit]', sizeGuide).forEach(function (b) {
-          b.classList.remove('is-active');
-          b.setAttribute('aria-pressed', 'false');
-        });
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-pressed', 'true');
-        var table = $('.sg-table', sizeGuide);
-        if (table) table.className = 'sg-table unit-' + btn.getAttribute('data-unit');
-      });
-    });
-  }
 
   /* ----------------------------------------------------------
      Search overlay + predictive results

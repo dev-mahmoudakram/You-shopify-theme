@@ -616,9 +616,6 @@ body.scroll-locked { overflow: hidden; }
 .acc__body ul { margin: 0; padding-left: 18px; }
 .acc__body a { color: var(--sage); }
 
-.sizeguide-link { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); text-decoration: underline; text-underline-offset: 3px; }
-.sizeguide-link:hover { color: var(--sage); }
-
 .pdp-details { padding-bottom: 112px; }
 .pdp-details__grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
 @media (min-width: 768px) { .pdp-details__grid { grid-template-columns: repeat(3, 1fr); } }
@@ -627,33 +624,6 @@ body.scroll-locked { overflow: hidden; }
 .pdp-detail__text { color: var(--mute); font-size: 13px; line-height: 1.75; }
 
 .related { border-top: 1px solid var(--line); padding: 72px 0 112px; }
-
-/* ============================================================
-   SIZE GUIDE MODAL
-   ============================================================ */
-.modal {
-  position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center;
-  padding: 20px; visibility: hidden; opacity: 0; transition: opacity 0.35s, visibility 0.35s;
-}
-.modal.is-open { visibility: visible; opacity: 1; }
-.modal__veil { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
-.modal__panel {
-  position: relative; z-index: 2; width: 100%; max-width: 560px; max-height: 85vh; overflow: auto;
-  background: var(--raised); border: 1px solid var(--line); padding: 32px;
-  transform: translateY(14px); transition: transform 0.4s var(--ease-out);
-}
-.modal.is-open .modal__panel { transform: translateY(0); }
-.modal__close { position: absolute; top: 14px; right: 14px; padding: 8px; color: var(--mute); }
-.modal__close:hover { color: var(--ink); }
-.modal__title { margin: 0 0 6px; font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; }
-.sizeguide__toggle { display: inline-flex; border: 1px solid var(--line); margin: 14px 0 18px; }
-.sizeguide__toggle button { padding: 8px 18px; font-size: 10px; letter-spacing: 0.22em; color: var(--mute); }
-.sizeguide__toggle button.is-active { background: var(--ink); color: var(--on-ink); }
-.sg-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.sg-table th, .sg-table td { border: 1px solid var(--line); padding: 10px 12px; text-align: center; letter-spacing: 0.06em; }
-.sg-table th { color: var(--mute); font-weight: 500; text-transform: uppercase; font-size: 10px; letter-spacing: 0.2em; }
-.sg-table .unit-cm .in, .sg-table .unit-in .cm { display: none; }
-.sg-note { margin-top: 14px; font-size: 11px; color: var(--mute); }
 
 /* ============================================================
    CART DRAWER

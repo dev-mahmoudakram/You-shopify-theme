@@ -45,9 +45,6 @@
               <div class="pdp-option__head">
                 <span class="pdp-option__name">{{ option.name | escape }}</span>
                 <span class="pdp-option__value" data-option-value="{{ option.name | escape }}">{{ option.selected_value | escape }}</span>
-                {%- if option.name == 'Size' -%}
-                  <button type="button" class="sizeguide-link" data-open-size-guide>{{ 'products.product.size_guide' | t }}</button>
-                {%- endif -%}
               </div>
               <div class="pdp-pills">
                 {%- for value in option.values -%}
@@ -152,8 +149,6 @@
     </div>
   </div>
 {%- endif -%}
-
-{% render 'size-guide' %}
 
 {% schema %}
 {
